@@ -32,7 +32,7 @@ function LoginFormPage() {
       <ul className='errors-list'>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <label>
+      <label className='form-label'>
         Username or Email
         <input
           type="text"
@@ -41,7 +41,7 @@ function LoginFormPage() {
           required
         />
       </label>
-      <label>
+      <label className='form-label'>
         Password
         <input
           type="password"
@@ -50,7 +50,7 @@ function LoginFormPage() {
           required
         />
       </label>
-      <button type="submit">Log In</button>
+      <button type="submit" className='btn-Log-in-Log-out'>Log In</button>
       </div>
     </form>
   );
