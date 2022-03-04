@@ -18,9 +18,15 @@ h2 {
 
 button {
     border-radius: 5px;
+    padding: 5px 20px;
+    margin: 10px 0;
 }
 
 .btn-Log-in-Log-out {
     background-color: #4983FF;
     color: #FFFFFF;
 }
+
+.errors {
+    color: red;
+  }
