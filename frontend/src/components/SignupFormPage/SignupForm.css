@@ -1,14 +1,15 @@
-.sign-up-form{
-    display: flex;
-    flex-direction: column;
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
 }
 
-.form-label {
-    background-color: #ffffff;
-    text-align: center;
-    margin: 10px;
-    border: 1px solid #888;
-    width: 80%;
+.signup-form-label {
+  background-color: #ffffff;
+  text-align: center;
+  margin: 10px;
+  width: 80%;
 }
 
 input[type="text"],
@@ -19,4 +20,5 @@ input[type="password"] {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  border-radius: 20px;
 }
