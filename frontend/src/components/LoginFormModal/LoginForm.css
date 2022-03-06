@@ -1,15 +1,21 @@
-
-.log-in-form{
-    display: flex;
-    flex-direction: column;
+.log-in-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 500px;
 }
 
-.form-label {
-    background-color: #ffffff;
-    text-align: center;
-    margin: 10px;
-    border: 1px solid #888;
-    width: 80%;
+.login-form-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  text-align: center;
+  margin: 10px;
+  width: 80%;
 }
 
 input[type="text"],
@@ -19,5 +25,6 @@ input[type="password"] {
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
+  border-radius: 20px;
   box-sizing: border-box;
 }

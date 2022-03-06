@@ -1,0 +1,43 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100%;
+
+}
+
+.navList {
+    display: flex;
+    width: 99%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navButton {
+    display: block;
+    width: 115px;
+    height: 35px;
+    background: transparent;
+    outline: solid #767676;
+    outline-width: thin;
+    text-align: center;
+    color: #484848;
+    font-weight: bold;
+    line-height: 25px;
+    border-radius: 20px;
+    padding: 5px 20px;
+    margin: 10px 10px;
+    text-decoration: none;
+
+}
+
+.navList-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
