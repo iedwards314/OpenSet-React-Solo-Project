@@ -23,3 +23,8 @@ npx dotenv sequelize db:seed:undo:all
 npx dotenv sequelize-cli db:migrate:undo:all
 npx dotenv sequelize-cli db:migrate
 npx dotenv sequelize db:seed:all
+
+heroku run npm run sequelize db:seed:undo:all
+heroku run npm run sequelize db:migrate:undo:all
+heroku run npm run sequelize db:migrate
+heroku run npm run sequelize db:seed:all
