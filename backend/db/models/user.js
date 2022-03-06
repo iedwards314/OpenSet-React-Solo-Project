@@ -29,7 +29,19 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [60, 60]
       }
-    }
+    },
+    profilePicture: {
+      type: DataTypes.TEXT,
+    },
+    job: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [3, 80],
+      }
+    },
+    biography: {
+      type: DataTypes.TEXT,
+    },
   },
   {
     defaultScope: {
@@ -87,6 +99,8 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function(models) {
     // associations can be defined here
+    User.hasMany(models.Spot, {foreignKey:'userId'});
+
   };
 
   return User;
