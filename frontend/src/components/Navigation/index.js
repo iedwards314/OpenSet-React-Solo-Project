@@ -15,6 +15,9 @@ function Navigation({ isLoaded }){
         <li className='navList-home'>
           <NavLink className='navButton'exact to="/">Home</NavLink>
         </li>
+        <li className='navList-home'>
+          <NavLink className='navButton' exact to="/spots">Spots</NavLink>
+        </li>
         <li className='navList-item'>
           <ProfileButton user={sessionUser} />
         </li>
