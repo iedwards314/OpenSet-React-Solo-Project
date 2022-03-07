@@ -27,6 +27,7 @@ const SpotsListPage = () => {
         {spotsArr.map((spot) => (
           <li key={spot.id}>
             <h3>{spot.name}</h3>
+            <img src={`${spot.Images[0].url}`} alt="movie set idea"></img>
           </li>
         ))}
       </ul>

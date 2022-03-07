@@ -3,11 +3,8 @@
 
 const SPOTSLIST = "spots"
 
-console.log("hitting SPOTSLIST", SPOTSLIST);
-
 //list action creator
 export const spotsList = (spots) => {
-    console.log("we are at the action creator");
     return {
         type: SPOTSLIST,
         spots
@@ -16,7 +13,6 @@ export const spotsList = (spots) => {
 
 //read spots list thunk
 export const getSpots = () => async dispatch => {
-    console.log("we are at the thunk")
     const response = await fetch('/api/spots');
     if(response.ok) {
         const list = await response.json();
