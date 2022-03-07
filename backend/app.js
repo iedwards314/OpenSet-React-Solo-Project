@@ -19,6 +19,9 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(express.json());
 
+//added for requests
+app.use(express.urlencoded({ extended: false}));
+
 // Security Middleware
 if (!isProduction) {
   // enable cors only in development
