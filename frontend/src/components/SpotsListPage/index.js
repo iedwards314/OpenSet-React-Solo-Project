@@ -1,12 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { NavLink, Route, useHistory } from "react-router-dom";
+import { NavLink, Route, useHistory, Redirect } from "react-router-dom";
 import { getSpots } from "../../store/spots";
 import "./SpotsListPage.css";
 
-const SpotsListPage = ({isLoaded}) => {
-  const sessionUser = useSelector(state => state.session.user);
-
+const SpotsListPage = ({ isLoaded }) => {
+  const sessionUser = useSelector((state) => state.session.user);
   console.log(sessionUser);
 
   const dispatch = useDispatch();
@@ -24,33 +23,30 @@ const SpotsListPage = ({isLoaded}) => {
   }
 
   const createSpotButton = () => {
-    if(!sessionUser) {
-      return (
-        <></>
-      )
+    if (!sessionUser) {
+      return null;
     } else {
       return (
-        <NavLink className='navButton' exact to="/">Add a spot</NavLink>
-      )
+        <NavLink className="navButton" exact to="/spots/add">
+
+        </NavLink>
+      );
     }
-  }
+  };
 
   const userEditFunc = (spot) => {
-    if(!sessionUser) return
-    if(sessionUser.id === spot.userId) {
-      return(
-        <>
-        <button>EDIT</button>
-        <button>DELETE</button>
-        </>
-      )
-    } else {
+    if (!sessionUser) return;
+    if (sessionUser.id === spot.userId) {
       return (
         <>
+          <button>EDIT</button>
+          <button>DELETE</button>
         </>
-      )
+      );
+    } else {
+      return null;
     }
-  }
+  };
 
   return (
     <>
