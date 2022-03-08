@@ -28,7 +28,7 @@ const SpotsListPage = ({ isLoaded }) => {
     } else {
       return (
         <NavLink className="navButton" exact to="/spots/add">
-
+          Add Spot
         </NavLink>
       );
     }
