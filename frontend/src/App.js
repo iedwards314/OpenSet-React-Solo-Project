@@ -14,8 +14,6 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  const requireAuth = () => {};
-
   return (
     <>
       <Navigation isLoaded={isLoaded} />
@@ -24,7 +22,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/spots">
+          <Route isLoaded={isLoaded} path="/spots">
             <SpotsListPage />
           </Route>
           <Route path="/">

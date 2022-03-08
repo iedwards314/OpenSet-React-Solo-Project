@@ -1,10 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { NavLink, Route } from "react-router-dom";
+import { NavLink, Route, useHistory } from "react-router-dom";
 import { getSpots } from "../../store/spots";
 import "./SpotsListPage.css";
 
-const SpotsListPage = () => {
+const SpotsListPage = ({isLoaded}) => {
+  const sessionUser = useSelector(state => state.session.user);
+
+  console.log(sessionUser);
+
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots);
 
@@ -19,16 +23,46 @@ const SpotsListPage = () => {
     return null;
   }
 
+  const createSpotButton = () => {
+    if(!sessionUser) {
+      return (
+        <></>
+      )
+    } else {
+      return (
+        <NavLink className='navButton' exact to="/">Add a spot</NavLink>
+      )
+    }
+  }
+
+  const userEditFunc = (spot) => {
+    if(!sessionUser) return
+    if(sessionUser.id === spot.userId) {
+      return(
+        <>
+        <button>EDIT</button>
+        <button>DELETE</button>
+        </>
+      )
+    } else {
+      return (
+        <>
+        </>
+      )
+    }
+  }
+
   return (
     <>
       <h2>Spots List</h2>
-      <NavLink className='navButton' exact to="/">Add a spot</NavLink>
+      {createSpotButton()}
       {spotsArr.length <= 0 && <span>No Spots Available Right Now</span>}
       <ul className="spots-list">
         {spotsArr.map((spot) => (
           <li key={spot.id}>
             <h3>{spot.name}</h3>
             <img src={`${spot.Images[0].url}`} alt="movie set idea"></img>
+            {userEditFunc(spot)}
           </li>
         ))}
       </ul>
