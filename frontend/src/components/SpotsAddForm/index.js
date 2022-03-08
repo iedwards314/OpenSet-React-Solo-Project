@@ -37,14 +37,16 @@ function SpotsAddForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const roundedPrice = Math.round(price * 100) / 100;
+    const priceCheck = (typeof(roundedPrice))
+    console.log(priceCheck);
     const newSpot = {
-      user: sessionUser,
+      userId: sessionUser.id,
       address,
       city,
       country,
       name,
-      roundedPrice,
-      image,
+      price: roundedPrice,
+      mainImageURL: image,
     };
     //need to refactor the spot model to include a home image, then use the images table as secondary images
     console.log(newSpot);

@@ -11,11 +11,7 @@ const router = express.Router();
 router.get(
   "/",
   asyncHandler(async function (req, res) {
-    const spots = await Spot.findAll({
-      include: {
-        model: Image,
-      },
-    });
+    const spots = await Spot.findAll();
     return res.json(spots);
   })
 );
@@ -50,9 +46,6 @@ const createSpotValidations = [
   check("mainImageURL")
     .exists({ checkFalsy: true })
     .withMessage("Image URL can't be empty"),
-  check("mainImageURL")
-    .isLength({ max: 255 })
-    .withMessage("Image URL can't be longer than 255 characters"),
   handleValidationErrors,
 ];
 

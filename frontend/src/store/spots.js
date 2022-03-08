@@ -1,4 +1,5 @@
 import { ValidationError } from "../components/utils/validationError";
+import { csrfFetch } from "./csrf";
 
 //constant variable for routing
 
@@ -33,7 +34,7 @@ export const getSpots = () => async (dispatch) => {
 
 export const createSpot = (data) => async (dispatch) => {
   try {
-    const response = await fetch("/api/spots", {
+    const response = await csrfFetch("/api/spots", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
