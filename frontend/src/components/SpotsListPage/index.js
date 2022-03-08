@@ -22,6 +22,7 @@ const SpotsListPage = () => {
   return (
     <>
       <h2>Spots List</h2>
+      <NavLink className='navButton' exact to="/">Add a spot</NavLink>
       {spotsArr.length <= 0 && <span>No Spots Available Right Now</span>}
       <ul className="spots-list">
         {spotsArr.map((spot) => (

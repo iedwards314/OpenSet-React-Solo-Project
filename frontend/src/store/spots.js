@@ -1,13 +1,21 @@
 
 //constant variable for routing
 
-const SPOTSLIST = "spots"
+const SPOTSLIST = "spots/SPOTSLIST"
+const ADD_SPOT = "spots/ADD_SPOT"
 
 //list action creator
 export const spotsList = (spots) => {
     return {
         type: SPOTSLIST,
         spots
+    }
+}
+
+export const addOne = (spot) => {
+    return {
+        type: ADD_SPOT,
+        spot
     }
 }
 
@@ -18,7 +26,24 @@ export const getSpots = () => async dispatch => {
         const list = await response.json();
         dispatch(spotsList(list))
     }
+}
 
+//create spot thunk
+
+export const createSpot = data => async dispatch => {
+    try {
+        const response = await fetch("/api/spots", {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+
+    } catch (error) {
+        console.log("error at create spot thunk")
+        throw(error)
+    }
 }
 
 const spotsReducer = (state = {}, action) => {

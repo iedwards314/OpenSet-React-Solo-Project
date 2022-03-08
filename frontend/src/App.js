@@ -14,6 +14,8 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  const requireAuth = () => {};
+
   return (
     <>
       <Navigation isLoaded={isLoaded} />
