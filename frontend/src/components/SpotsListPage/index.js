@@ -57,7 +57,7 @@ const SpotsListPage = ({ isLoaded }) => {
         {spotsArr.map((spot) => (
           <li key={spot.id}>
             <h3>{spot.name}</h3>
-            <img src={`${spot.Images[0].url}`} alt="movie set idea"></img>
+            <img src={`${spot.mainImageURL}`} alt="movie set idea"></img>
             {userEditFunc(spot)}
           </li>
         ))}
