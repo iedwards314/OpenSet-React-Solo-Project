@@ -38,6 +38,7 @@ function SpotsAddForm() {
     e.preventDefault();
     const roundedPrice = Math.round(price * 100) / 100;
     const newSpot = {
+      user: sessionUser,
       address,
       city,
       country,
