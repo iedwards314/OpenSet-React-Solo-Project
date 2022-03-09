@@ -6,6 +6,7 @@ import "./SpotsListPage.css";
 import SpotsOnePage from "../SpotsOnePage";
 
 const SpotsListPage = ({ isLoaded }) => {
+  // debugger
   const sessionUser = useSelector((state) => state.session.user);
 
   const dispatch = useDispatch();
@@ -39,7 +40,9 @@ const SpotsListPage = ({ isLoaded }) => {
     if (sessionUser.id === spot.userId) {
       return (
         <>
-          <button>EDIT</button>
+          <NavLink className="navButton" exact to={`/spots/${spot.id}/edit`}>
+            Edit
+          </NavLink>
         </>
       );
     } else {
@@ -58,8 +61,8 @@ const SpotsListPage = ({ isLoaded }) => {
             <h3>{spot.name}</h3>
             <NavLink to={`/spots/${spot.id}`}>
               <img src={`${spot.mainImageURL}`} alt="movie set idea"></img>
-              {userEditFunc(spot)}
             </NavLink>
+              {userEditFunc(spot)}
           </li>
         ))}
       </ul>

@@ -124,17 +124,9 @@ router.delete(
   requireAuth,
   asyncHandler(async function (req, res, next) {
     const userId = req.user.id;
-    const spot = await Spot.findByPk(req.params.id, {
-      include: {
-        model: Image,
-      },
-    });
+    const spot = await Spot.findByPk(req.params.id);
     if (spot) {
       if (userId === spot.userId) {
-        for (let i = 0; i < spot.Images.length; i++) {
-          let spotImage = spot.Images[i];
-          await spotImage.destroy();
-        }
         await spot.destroy();
       } else {
         const err = Error("Unauthorized user");

@@ -29,10 +29,10 @@ export const addOne = (spot) => {
   };
 };
 
-export const removeOne = (spot) => {
+export const removeOne = (id) => {
   return {
     type: REMOVE_SPOT,
-    spot,
+    id,
   }
 }
 
@@ -44,7 +44,7 @@ export const updateOne = (spot) => {
 }
 
 //read spots list thunk
-export const getSpots = () => async (dispatch) => {
+export const getSpots = () => async dispatch => {
   const response = await fetch("/api/spots");
   if (response.ok) {
     const list = await response.json();
@@ -53,7 +53,7 @@ export const getSpots = () => async (dispatch) => {
 };
 
 //read one spot thunk
-export const getOneSpot = (id) => async (dispatch) => {
+export const getOneSpot = (id) => async dispatch => {
   const response = await fetch(`/api/spots/${id}`);
   if (response.ok) {
     const spot = await response.json();
@@ -63,7 +63,7 @@ export const getOneSpot = (id) => async (dispatch) => {
 
 //create spot thunk
 
-export const createSpot = (data) => async (dispatch) => {
+export const createSpot = (data) => async dispatch => {
   try {
     const response = await csrfFetch("/api/spots", {
       method: "post",
@@ -107,9 +107,10 @@ export const removeSpot = (spot) => async dispatch => {
   });
   if(response.ok){
     const destroyedSpot = await response.json();
-    dispatch(removeOne(destroyedSpot))
+    dispatch(removeOne(destroyedSpot.id))
     return destroyedSpot;
   }
+  return response
 }
 //UPDATE SPOT
 export const updateSpot = (spot) => async dispatch => {

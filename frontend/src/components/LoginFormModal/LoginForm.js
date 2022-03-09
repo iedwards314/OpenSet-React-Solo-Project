@@ -19,6 +19,16 @@ function LoginForm() {
       }
     );
   };
+  const handleSubmitDemo = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(
+      sessionActions.login({ credential: "Demo-lition", password: "password" })
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+  };
 
   return (
     <form className='log-in-form' onSubmit={handleSubmit}>
@@ -46,6 +56,7 @@ function LoginForm() {
         />
       </label>
       <button type="submit" className="btn-Log-in-Log-out">Log In</button>
+      <button onClick={handleSubmitDemo} className="btn-Log-in-Log-out">Demo User</button>
     </form>
   );
 }
