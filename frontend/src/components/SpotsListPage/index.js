@@ -40,7 +40,6 @@ const SpotsListPage = ({ isLoaded }) => {
       return (
         <>
           <button>EDIT</button>
-          <button>DELETE</button>
         </>
       );
     } else {

@@ -6,6 +6,7 @@ import { csrfFetch } from "./csrf";
 const SPOTSLIST = "spots/SPOTSLIST";
 const GET_ONE_SPOT = "spots/GET_SINGLE_SPOT";
 const ADD_SPOT = "spots/ADD_SPOT";
+const REMOVE_SPOT = "spots/REMOVE_SPOT"
 
 //list action creator
 export const spotsList = (spots) => {
@@ -28,6 +29,13 @@ export const addOne = (spot) => {
     spot,
   };
 };
+
+export const removeOne = (spot) => {
+  return {
+    type: REMOVE_SPOT,
+    spot,
+  }
+}
 
 //read spots list thunk
 export const getSpots = () => async (dispatch) => {
@@ -86,6 +94,19 @@ export const createSpot = (data) => async (dispatch) => {
   }
 };
 
+//DESTROY SPOT
+export const removeSpot = (spot) => async dispatch => {
+  const response = await csrfFetch(`/api/spots/${spot.id}`, {
+    method: 'delete',
+  });
+  if(response.ok){
+    const destroyedSpot = await response.json();
+    dispatch(removeOne(destroyedSpot))
+    return destroyedSpot;
+  }
+}
+
+
 const spotsReducer = (state = {}, action) => {
   switch (action.type) {
     case SPOTSLIST: {
@@ -100,8 +121,6 @@ const spotsReducer = (state = {}, action) => {
         ...state,
         [action.spot.id]: action.spot,
       };
-      const newSpotList = newState.spots.map((id) => newState[id]);
-      newSpotList.push(action.spot);
       return newState;
     case GET_ONE_SPOT: {
       return {
@@ -111,6 +130,11 @@ const spotsReducer = (state = {}, action) => {
           ...action.spot,
         },
       };
+    }
+    case REMOVE_SPOT: {
+      const newState = {...state};
+      delete newState[action.id];
+      return newState
     }
     default:
       return state;

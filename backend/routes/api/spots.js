@@ -70,11 +70,40 @@ router.post(
   "/",
   requireAuth,
   createSpotValidations,
-  asyncHandler(async function (req, res,next) {
+  asyncHandler(async function (req, res, next) {
     const spotDetails = req.body;
     const spot = await Spot.create(spotDetails);
     res.json(spot);
   })
 );
 
-module.exports = router;
+router.delete("/:id", requireAuth, asyncHandler(async function (req, res, next){
+  const userId = req.user.id
+  const spot = await Spot.findByPk(req.params.id,
+    {
+      include:{
+        model: Image
+      }
+  });
+  if(spot) {
+    if (userId === spot.userId){
+      for(let i = 0; i < spot.Images.length; i++){
+        let spotImage = spot.Images[i];
+        await spotImage.destroy();
+      }
+      await spot.destroy();
+    }
+    else {
+      const err = Error("Unauthorized user");
+      err.errors = [`unauthorized delete`];
+      err.title = "User not authorized to delete ";
+      err.status = 401;
+      return err;
+    }
+    res.json(spot);
+  } else {
+    next(spotNotFoundError(req.params.id))
+  }
+  }))
+
+  module.exports = router;
