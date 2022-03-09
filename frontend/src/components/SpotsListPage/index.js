@@ -39,7 +39,9 @@ const SpotsListPage = ({ isLoaded }) => {
     if (sessionUser.id === spot.userId) {
       return (
         <>
-          <button>EDIT</button>
+          <NavLink className="navButton" exact to={`/spots/${spot.id}/edit`}>
+            Edit
+          </NavLink>
         </>
       );
     } else {
