@@ -8,3 +8,9 @@
 .btn-cancel-delete{
     width: 150px;
 }
+
+.image-spot {
+    width: 500px;
+    height: 500px;
+    border-radius: 10%;
+}

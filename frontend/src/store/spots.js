@@ -1,12 +1,11 @@
 import { ValidationError } from "../components/utils/validationError";
 import { csrfFetch } from "./csrf";
 
-//constant variable for routing
-
 const SPOTSLIST = "spots/SPOTSLIST";
 const GET_ONE_SPOT = "spots/GET_SINGLE_SPOT";
 const ADD_SPOT = "spots/ADD_SPOT";
 const REMOVE_SPOT = "spots/REMOVE_SPOT"
+const UPDATE_SPOT = "spots/UPDATE_SPOT"
 
 //list action creator
 export const spotsList = (spots) => {
@@ -34,6 +33,13 @@ export const removeOne = (spot) => {
   return {
     type: REMOVE_SPOT,
     spot,
+  }
+}
+
+export const updateOne = (spot) => {
+  return {
+    type: UPDATE_SPOT,
+    spot
   }
 }
 
@@ -105,6 +111,21 @@ export const removeSpot = (spot) => async dispatch => {
     return destroyedSpot;
   }
 }
+//UPDATE SPOT
+export const updateSpot = (spot) => async dispatch => {
+  const response = await csrfFetch(`/api/spots/${spot.id}`, {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(spot)
+  });
+  if(response.ok){
+    const editedSpot = await response.json();
+    dispatch(updateOne(editedSpot));
+    return editedSpot;
+  }
+}
 
 
 const spotsReducer = (state = {}, action) => {
@@ -136,6 +157,11 @@ const spotsReducer = (state = {}, action) => {
       delete newState[action.id];
       return newState
     }
+    case UPDATE_SPOT:
+      return {
+        ...state,
+        [action.spot.id]: action.spot
+      }
     default:
       return state;
   }
