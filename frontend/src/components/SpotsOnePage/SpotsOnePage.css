@@ -1,0 +1,10 @@
+.btn-confirm-delete{
+    width: 150px;
+    background-color: #FF5A5F;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.btn-cancel-delete{
+    width: 150px;
+}

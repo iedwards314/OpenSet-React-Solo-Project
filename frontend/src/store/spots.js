@@ -4,13 +4,22 @@ import { csrfFetch } from "./csrf";
 //constant variable for routing
 
 const SPOTSLIST = "spots/SPOTSLIST";
+const GET_ONE_SPOT = "spots/GET_SINGLE_SPOT";
 const ADD_SPOT = "spots/ADD_SPOT";
+const REMOVE_SPOT = "spots/REMOVE_SPOT"
 
 //list action creator
 export const spotsList = (spots) => {
   return {
     type: SPOTSLIST,
     spots,
+  };
+};
+
+export const getOne = (spot) => {
+  return {
+    type: GET_ONE_SPOT,
+    spot,
   };
 };
 
@@ -21,12 +30,28 @@ export const addOne = (spot) => {
   };
 };
 
+export const removeOne = (spot) => {
+  return {
+    type: REMOVE_SPOT,
+    spot,
+  }
+}
+
 //read spots list thunk
 export const getSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
   if (response.ok) {
     const list = await response.json();
     dispatch(spotsList(list));
+  }
+};
+
+//read one spot thunk
+export const getOneSpot = (id) => async (dispatch) => {
+  const response = await fetch(`/api/spots/${id}`);
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(getOne(spot));
   }
 };
 
@@ -42,7 +67,7 @@ export const createSpot = (data) => async (dispatch) => {
       body: JSON.stringify(data),
     });
     if (!response.ok) {
-        let error
+      let error;
       if (response.status === 422) {
         error = await response.json();
         throw new ValidationError(error.errors, response.statusText);
@@ -63,11 +88,24 @@ export const createSpot = (data) => async (dispatch) => {
 
     const spot = await response.json();
     dispatch(addOne(spot));
-    return spot
+    return spot;
   } catch (error) {
     throw error;
   }
 };
+
+//DESTROY SPOT
+export const removeSpot = (spot) => async dispatch => {
+  const response = await csrfFetch(`/api/spots/${spot.id}`, {
+    method: 'delete',
+  });
+  if(response.ok){
+    const destroyedSpot = await response.json();
+    dispatch(removeOne(destroyedSpot))
+    return destroyedSpot;
+  }
+}
+
 
 const spotsReducer = (state = {}, action) => {
   switch (action.type) {
@@ -77,6 +115,26 @@ const spotsReducer = (state = {}, action) => {
         newState[spot.id] = spot;
       });
       return newState;
+    }
+    case ADD_SPOT:
+      const newState = {
+        ...state,
+        [action.spot.id]: action.spot,
+      };
+      return newState;
+    case GET_ONE_SPOT: {
+      return {
+        ...state,
+        [action.spot.id]: {
+          ...state[action.spot.id],
+          ...action.spot,
+        },
+      };
+    }
+    case REMOVE_SPOT: {
+      const newState = {...state};
+      delete newState[action.id];
+      return newState
     }
     default:
       return state;
