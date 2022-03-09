@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 //constant variable for routing
 
 const SPOTSLIST = "spots/SPOTSLIST";
+const GET_ONE_SPOT = "spots/GET_SINGLE_SPOT";
 const ADD_SPOT = "spots/ADD_SPOT";
 
 //list action creator
@@ -11,6 +12,13 @@ export const spotsList = (spots) => {
   return {
     type: SPOTSLIST,
     spots,
+  };
+};
+
+export const getOne = (spot) => {
+  return {
+    type: GET_ONE_SPOT,
+    spot,
   };
 };
 
@@ -30,6 +38,15 @@ export const getSpots = () => async (dispatch) => {
   }
 };
 
+//read one spot thunk
+export const getOneSpot = (id) => async (dispatch) => {
+  const response = await fetch(`/api/spots/${id}`);
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(getOne(spot));
+  }
+};
+
 //create spot thunk
 
 export const createSpot = (data) => async (dispatch) => {
@@ -42,7 +59,7 @@ export const createSpot = (data) => async (dispatch) => {
       body: JSON.stringify(data),
     });
     if (!response.ok) {
-        let error
+      let error;
       if (response.status === 422) {
         error = await response.json();
         throw new ValidationError(error.errors, response.statusText);
@@ -63,7 +80,7 @@ export const createSpot = (data) => async (dispatch) => {
 
     const spot = await response.json();
     dispatch(addOne(spot));
-    return spot
+    return spot;
   } catch (error) {
     throw error;
   }
@@ -77,6 +94,23 @@ const spotsReducer = (state = {}, action) => {
         newState[spot.id] = spot;
       });
       return newState;
+    }
+    case ADD_SPOT:
+      const newState = {
+        ...state,
+        [action.spot.id]: action.spot,
+      };
+      const newSpotList = newState.spots.map((id) => newState[id]);
+      newSpotList.push(action.spot);
+      return newState;
+    case GET_ONE_SPOT: {
+      return {
+        ...state,
+        [action.spot.id]: {
+          ...state[action.spot.id],
+          ...action.spot,
+        },
+      };
     }
     default:
       return state;

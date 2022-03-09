@@ -10,11 +10,28 @@ const router = express.Router();
 
 router.get(
   "/",
-  asyncHandler(async function (req, res) {
+  asyncHandler(async function (req, res, next) {
     const spots = await Spot.findAll();
     return res.json(spots);
   })
 );
+
+const spotNotFoundError = (id) => {
+  const err = Error("Spot not found");
+  err.errors = [`Spot with id of ${id} could not be found.`];
+  err.title = "Spot not found.";
+  err.status = 404;
+  return err;
+}
+
+router.get("/:id", asyncHandler(async function (req, res, next) {
+  const spot = await Spot.findByPk(req.params.id);
+  if(spot) {
+    res.json(spot)
+  } else {
+    next(spotNotFoundError(req.params.id))
+  }
+}))
 
 const createSpotValidations = [
   check("name").exists({ checkFalsy: true }).withMessage("Name can't be empty"),
@@ -53,7 +70,7 @@ router.post(
   "/",
   requireAuth,
   createSpotValidations,
-  asyncHandler(async function (req, res) {
+  asyncHandler(async function (req, res,next) {
     const spotDetails = req.body;
     const spot = await Spot.create(spotDetails);
     res.json(spot);

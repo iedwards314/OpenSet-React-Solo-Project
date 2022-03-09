@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { NavLink, Route, useHistory, Redirect } from "react-router-dom";
+import { NavLink, Route, useHistory, Redirect, Link, Switch } from "react-router-dom";
 import { getSpots } from "../../store/spots";
 import "./SpotsListPage.css";
+import SpotsOnePage from "../SpotsOnePage";
 
 const SpotsListPage = ({ isLoaded }) => {
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(sessionUser);
 
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots);
@@ -57,8 +57,10 @@ const SpotsListPage = ({ isLoaded }) => {
         {spotsArr.map((spot) => (
           <li key={spot.id}>
             <h3>{spot.name}</h3>
-            <img src={`${spot.mainImageURL}`} alt="movie set idea"></img>
-            {userEditFunc(spot)}
+            <NavLink to={`/spots/${spot.id}`}>
+              <img src={`${spot.mainImageURL}`} alt="movie set idea"></img>
+              {userEditFunc(spot)}
+            </NavLink>
           </li>
         ))}
       </ul>

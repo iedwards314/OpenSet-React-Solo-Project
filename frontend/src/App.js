@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import SpotsListPage from "./components/SpotsListPage";
 import SpotsAddForm from "./components/SpotsAddForm";
+import SpotsOnePage from "./components/SpotsOnePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route isLoaded={isLoaded} path="/spots/" exact>
             <SpotsListPage />
+          </Route>
+          <Route isLoaded={isLoaded} path="/spots/:id" exact>
+            <SpotsOnePage />
           </Route>
           <Route path="/">
             <SplashPage />
