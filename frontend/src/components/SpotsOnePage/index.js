@@ -16,7 +16,7 @@ const SpotsOnePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOneSpot(spotId));
+      dispatch(getOneSpot(spotId));
   }, [dispatch]);
 
   const createSpotButton = () => {
@@ -35,16 +35,14 @@ const SpotsOnePage = () => {
       e.preventDefault();
       const payload = {
           userId: sessionUser.id,
-          id: spot.id
+          id: spot?.id
       }
       let destroyedSpot
-      try{
-          destroyedSpot = await dispatch(removeSpot(payload));
-      } catch (error) {
-          console.log("error in delete")
-      }
-      if(destroyedSpot){
-          history.push("/spots");
+      destroyedSpot = await dispatch(removeSpot(payload))
+      .catch (error => (console.log("error in delete")))
+
+      if(destroyedSpot.id){
+        history.push("/spots/");
       }
   }
 
@@ -84,10 +82,10 @@ const SpotsOnePage = () => {
 
   const userEditFunc = (spot) => {
     if (!sessionUser) return;
-    if (sessionUser.id === spot.userId) {
+    if (sessionUser.id === spot?.userId) {
       return (
         <>
-          <NavLink className="navButton" exact to={`/spots/${spot.id}/edit`}>
+          <NavLink className="navButton" exact to={`/spots/${spot?.id}/edit`}>
             Edit
           </NavLink>
           {showDeleteButtons()}
@@ -101,11 +99,11 @@ const SpotsOnePage = () => {
   return (
     <>
       {createSpotButton()}
-      <h3>{spot.name}</h3>
-      <div>{`Price: ${spot.price}`}</div>
-      <div>{`Address: ${spot.address}, ${spot.city}, ${spot.country}`}</div>
+      <h3>{spot?.name}</h3>
+      <div>{`Price: ${spot?.price}`}</div>
+      <div>{`Address: ${spot?.address}, ${spot?.city}, ${spot?.country}`}</div>
 
-      <img className="image-spot" src={`${spot.mainImageURL}`} alt="movie set idea"></img>
+      {spot ? <img className="image-spot" src={`${spot?.mainImageURL}`} alt="movie set idea"></img> : null}
       {userEditFunc(spot)}
     </>
   );
