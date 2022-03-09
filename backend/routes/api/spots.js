@@ -85,7 +85,7 @@ router.put(
   requireAuth,
   asyncHandler(async function (req, res, next) {
     const spotId = req.body.id;
-    const userId = req.user.id;
+    const userId = req.body.userId;
     // const {address, city, country, name, price, mainImageURL} = req.body;
     const address = req.body.address;
     const city = req.body.city;

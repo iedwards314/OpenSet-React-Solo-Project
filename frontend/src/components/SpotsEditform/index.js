@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { ValidationError } from "../utils/validationError";
 import ErrorMessage from "../utils/ErrorMessage";
-import { createSpot } from "../../store/spots";
+import { updateSpot } from "../../store/spots";
 import * as sessionActions from "../../store/session";
 
 function SpotsEditForm() {
@@ -42,6 +42,7 @@ function SpotsEditForm() {
     e.preventDefault();
     const roundedPrice = Math.round(price * 100) / 100;
     const updatedSpot = {
+      id: spot.id,
       userId: sessionUser.id,
       address,
       city,
@@ -53,7 +54,7 @@ function SpotsEditForm() {
     console.log(updatedSpot);
     let editedSpot;
     try {
-        editedSpot = await dispatch(createSpot(updatedSpot));
+        editedSpot = await dispatch(updateSpot(updatedSpot));
       console.log("success");
     } catch (error) {
       console.log("there was an error in the edit spot form");
