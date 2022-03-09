@@ -13,7 +13,6 @@ const SpotsOnePage = () => {
   let history = useHistory();
 
   const spot = useSelector((state) => state.spots[spotId]);
-  console.log(spot);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -74,12 +73,23 @@ const SpotsOnePage = () => {
     }
   };
 
+  const editSpotButton = () => {
+    return (
+      <NavLink className="navButton" exact to="/spots/add">
+        Add Spot
+      </NavLink>
+    );
+
+  }
+
   const userEditFunc = (spot) => {
     if (!sessionUser) return;
     if (sessionUser.id === spot.userId) {
       return (
         <>
-          <button>EDIT</button>
+          <NavLink className="navButton" exact to={`/spots/${spot.id}/edit`}>
+            Edit
+          </NavLink>
           {showDeleteButtons()}
         </>
       );
@@ -93,7 +103,7 @@ const SpotsOnePage = () => {
       <h2>Specific Spots Page</h2>
       {createSpotButton()}
       <h3>{spot.name}</h3>
-      <img src={`${spot.mainImageURL}`} alt="movie set idea"></img>
+      <img className="image-spot" src={`${spot.mainImageURL}`} alt="movie set idea"></img>
       {userEditFunc(spot)}
     </>
   );

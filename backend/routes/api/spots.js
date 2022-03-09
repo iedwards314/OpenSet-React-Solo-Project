@@ -22,16 +22,19 @@ const spotNotFoundError = (id) => {
   err.title = "Spot not found.";
   err.status = 404;
   return err;
-}
+};
 
-router.get("/:id", asyncHandler(async function (req, res, next) {
-  const spot = await Spot.findByPk(req.params.id);
-  if(spot) {
-    res.json(spot)
-  } else {
-    next(spotNotFoundError(req.params.id))
-  }
-}))
+router.get(
+  "/:id",
+  asyncHandler(async function (req, res, next) {
+    const spot = await Spot.findByPk(req.params.id);
+    if (spot) {
+      res.json(spot);
+    } else {
+      next(spotNotFoundError(req.params.id));
+    }
+  })
+);
 
 const createSpotValidations = [
   check("name").exists({ checkFalsy: true }).withMessage("Name can't be empty"),
@@ -77,33 +80,74 @@ router.post(
   })
 );
 
-router.delete("/:id", requireAuth, asyncHandler(async function (req, res, next){
-  const userId = req.user.id
-  const spot = await Spot.findByPk(req.params.id,
-    {
-      include:{
-        model: Image
-      }
-  });
-  if(spot) {
-    if (userId === spot.userId){
-      for(let i = 0; i < spot.Images.length; i++){
-        let spotImage = spot.Images[i];
-        await spotImage.destroy();
-      }
-      await spot.destroy();
-    }
-    else {
-      const err = Error("Unauthorized user");
-      err.errors = [`unauthorized delete`];
-      err.title = "User not authorized to delete ";
-      err.status = 401;
-      return err;
-    }
-    res.json(spot);
-  } else {
-    next(spotNotFoundError(req.params.id))
-  }
-  }))
+router.put(
+  "/:id",
+  requireAuth,
+  asyncHandler(async function (req, res, next) {
+    const spotId = req.body.id;
+    const userId = req.body.userId;
+    // const {address, city, country, name, price, mainImageURL} = req.body;
+    const address = req.body.address;
+    const city = req.body.city;
+    const country = req.body.country;
+    const name = req.body.name;
+    const price = req.body.price;
+    const mainImageURL = req.body.mainImageURL;
+    const spot = await Spot.findByPk(spotId);
+    if(spot){
+      if(userId === spot.userId){
+        spot.address = address;
+        spot.city = city;
+        spot.country = country;
+        spot.name = name;
+        spot.price = price;
+        spot.mainImageURL = mainImageURL;
+        await spot.save();
+        res.json(spot)
 
-  module.exports = router;
+      } else {
+        const err = Error("Unauthorized user");
+        err.errors = [`unauthorized delete`];
+        err.title = "User not authorized to delete ";
+        err.status = 401;
+        return err;
+      }
+    }else {
+      next(spotNotFoundError(req.body.id));
+    }
+
+  })
+);
+
+router.delete(
+  "/:id",
+  requireAuth,
+  asyncHandler(async function (req, res, next) {
+    const userId = req.user.id;
+    const spot = await Spot.findByPk(req.params.id, {
+      include: {
+        model: Image,
+      },
+    });
+    if (spot) {
+      if (userId === spot.userId) {
+        for (let i = 0; i < spot.Images.length; i++) {
+          let spotImage = spot.Images[i];
+          await spotImage.destroy();
+        }
+        await spot.destroy();
+      } else {
+        const err = Error("Unauthorized user");
+        err.errors = [`unauthorized delete`];
+        err.title = "User not authorized to delete ";
+        err.status = 401;
+        return err;
+      }
+      res.json(spot);
+    } else {
+      next(spotNotFoundError(req.params.id));
+    }
+  })
+);
+
+module.exports = router;
