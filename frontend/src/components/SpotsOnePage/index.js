@@ -100,9 +100,11 @@ const SpotsOnePage = () => {
 
   return (
     <>
-      <h2>Specific Spots Page</h2>
       {createSpotButton()}
       <h3>{spot.name}</h3>
+      <div>{`Price: ${spot.price}`}</div>
+      <div>{`Address: ${spot.address}, ${spot.city}, ${spot.country}`}</div>
+
       <img className="image-spot" src={`${spot.mainImageURL}`} alt="movie set idea"></img>
       {userEditFunc(spot)}
     </>
