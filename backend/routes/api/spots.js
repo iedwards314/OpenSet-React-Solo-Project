@@ -4,7 +4,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
 const { check } = require("express-validator");
 
-const { Spot, Image, User } = require("../../db/models");
+const { Spot, Image, User, Review } = require("../../db/models");
 
 const router = express.Router();
 
@@ -24,12 +24,31 @@ const spotNotFoundError = (id) => {
   return err;
 };
 
+// router.get(
+//   "/:id",
+//   asyncHandler(async function (req, res, next) {
+//     const spot = await Spot.findByPk(req.params.id);
+//     if (spot) {
+//       res.json(spot);
+//     } else {
+//       next(spotNotFoundError(req.params.id));
+//     }
+//   })
+// );
+
 router.get(
   "/:id",
   asyncHandler(async function (req, res, next) {
-    const spot = await Spot.findByPk(req.params.id);
+    const spotId = req.params.id;
+    const spot = await Spot.findByPk(spotId);
     if (spot) {
-      res.json(spot);
+      const reviews = await Review.findAll({
+        where: {
+          spotId: spotId,
+        },
+      });
+      const responseObj = { spot, reviews };
+      res.json(responseObj);
     } else {
       next(spotNotFoundError(req.params.id));
     }
@@ -94,8 +113,8 @@ router.put(
     const price = req.body.price;
     const mainImageURL = req.body.mainImageURL;
     const spot = await Spot.findByPk(spotId);
-    if(spot){
-      if(userId === spot.userId){
+    if (spot) {
+      if (userId === spot.userId) {
         spot.address = address;
         spot.city = city;
         spot.country = country;
@@ -103,8 +122,7 @@ router.put(
         spot.price = price;
         spot.mainImageURL = mainImageURL;
         await spot.save();
-        res.json(spot)
-
+        res.json(spot);
       } else {
         const err = Error("Unauthorized user");
         err.errors = [`unauthorized delete`];
@@ -112,10 +130,9 @@ router.put(
         err.status = 401;
         return err;
       }
-    }else {
+    } else {
       next(spotNotFoundError(req.body.id));
     }
-
   })
 );
 
