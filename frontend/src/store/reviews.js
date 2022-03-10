@@ -102,7 +102,7 @@ export const createReview = (data) => async (dispatch) => {
 
 //DESTROY REVIEW
 export const removeReview = (review) => async (dispatch) => {
-  const response = await csrfFetch(`/api/reviews`, {
+  const response = await csrfFetch(`/api/reviews/${review.id}`, {
     method: "delete",
   });
   if (response.ok) {

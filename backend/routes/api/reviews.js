@@ -71,17 +71,12 @@ router.post(
 );
 
 router.delete(
-  "/",
+  "/:id",
   requireAuth,
   asyncHandler(async function (req, res, next) {
     const userId = req.user.id;
-    const spotId = req.body.spotId
-    const review = await Review.findOne({
-        where:{
-            spotId,
-            userId
-        }
-    });
+    const reviewId = req.params.id
+    const review = await Review.findByPk(reviewId);
     if (review) {
       if (userId === review.userId) {
         await review.destroy();

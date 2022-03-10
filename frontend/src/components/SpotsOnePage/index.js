@@ -188,15 +188,15 @@ const SpotsOnePage = () => {
       let review = reviews[i];
       if(review?.id === sessionUser.id){
         userReview = reviews[i];
-        console.log("spotId is...", userReview.Review.spotId);
+        console.log("spotId is...", userReview.Review.id);
         console.log("userId is...", userReview.id);
         break
       }
     }
     //create a getOne dispatch method to find the exact review. Then destroy it.
     const payload = {
+        id: userReview.Review.id,
         userId: userReview.id,
-        spotId: userReview.Review.id
     }
     let destroyedSpot
     destroyedSpot = await dispatch(removeReview(payload))
