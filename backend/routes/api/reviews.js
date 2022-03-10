@@ -8,6 +8,36 @@ const { Spot, Image, User, Review } = require("../../db/models");
 
 const router = express.Router();
 
+router.get(
+    "/",
+    asyncHandler(async function (req, res, next) {
+      const reviews = await Review.findAll();
+      return res.json(reviews);
+    })
+  );
+
+  const reviewNotFoundError = (id) => {
+    const err = Error("Review not found");
+    err.errors = [`Review with id of ${id} could not be found.`];
+    err.title = "Review not found.";
+    err.status = 404;
+    return err;
+  };
+
+  router.get(
+    "/:id",
+    asyncHandler(async function (req, res, next) {
+      //reviewId is a STRING
+      const reviewId = req.params.id;
+      const review = await Review.findByPk(reviewId);
+      if (review) {
+        res.json(review);
+      } else {
+        next(reviewNotFoundError(req.params.id));
+      }
+    })
+  );
+
 const createReviewValidations = [
   check("userId")
     .exists({ checkFalsy: true })
