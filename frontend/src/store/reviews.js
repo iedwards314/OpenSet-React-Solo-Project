@@ -74,26 +74,44 @@ export const createReview = (data) => async (dispatch) => {
   }
 };
 
-const reviewsReducer = (state = {}, action) => {
-    switch (action.type) {
-        case ADD_REVIEW:
-            const newState = {
-              ...state,
-              [action.review.id]: action.review,
-            };
-            return newState;
-          case GET_REVIEW: {
-            return {
-              ...state,
-              [action.review.id]: {
-                ...state[action.review.id],
-                ...action.review,
-              },
-            };
-          }
-      default:
-        return state;
-    }
-  };
+//DESTROY REVIEW
+export const removeReview = (review) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews`, {
+    method: "delete",
+  });
+  if (response.ok) {
+    const destroyedReview = await response.json();
+    dispatch(removeOne(destroyedReview.id));
+    return destroyedReview;
+  }
+  return response;
+};
 
-  export default reviewsReducer;
+const reviewsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADD_REVIEW:
+      const newState = {
+        ...state,
+        [action.review.id]: action.review,
+      };
+      return newState;
+    case GET_REVIEW: {
+      return {
+        ...state,
+        [action.review.id]: {
+          ...state[action.review.id],
+          ...action.review,
+        },
+      };
+    }
+    case REMOVE_REVIEW: {
+      const newState = { ...state };
+      delete newState[action.id];
+      return newState;
+    }
+    default:
+      return state;
+  }
+};
+
+export default reviewsReducer;
