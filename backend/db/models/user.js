@@ -99,7 +99,13 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function(models) {
     // associations can be defined here
-    User.hasMany(models.Spot, {foreignKey:'userId'});
+    User.hasMany(models.Spot, {foreignKey:'userId', onDelete:'cascade', hooks: true});
+    User.belongsToMany(models.Spot, {
+      through: 'Review',
+      foreignKey: 'userId',
+      otherKey: 'spotId',
+      as: 'Reviews'
+    })
 
   };
 
