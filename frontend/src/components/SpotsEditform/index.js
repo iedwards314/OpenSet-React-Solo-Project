@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { ValidationError } from "../utils/validationError";
 import ErrorMessage from "../utils/ErrorMessage";
-import { updateSpot } from "../../store/spots";
+import { updateSpot, getOneSpot } from "../../store/spots";
 import * as sessionActions from "../../store/session";
 
 function SpotsEditForm() {
@@ -13,12 +13,12 @@ function SpotsEditForm() {
 
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const [address, setAddress] = useState(spot.address);
-  const [city, setCity] = useState(spot.city);
-  const [country, setCountry] = useState(spot.country);
-  const [name, setName] = useState(spot.name);
-  const [price, setPrice] = useState(spot.price);
-  const [image, setImage] = useState(spot.mainImageURL);
+  const [address, setAddress] = useState(spot?.address);
+  const [city, setCity] = useState(spot?.city);
+  const [country, setCountry] = useState(spot?.country);
+  const [name, setName] = useState(spot?.name);
+  const [price, setPrice] = useState(spot?.price);
+  const [image, setImage] = useState(spot?.mainImageURL);
   const [errors, setErrors] = useState([]);
   const [errorMessages, setErrorMessages] = useState({});
   let history = useHistory();
@@ -42,7 +42,7 @@ function SpotsEditForm() {
     e.preventDefault();
     const roundedPrice = Math.round(price * 100) / 100;
     const updatedSpot = {
-      id: spot.id,
+      id: spot?.id,
       userId: sessionUser.id,
       address,
       city,
@@ -68,7 +68,7 @@ function SpotsEditForm() {
 
   return (
     <>
-      <img src={`${spot.mainImageURL}`}></img>
+      <img src={`${spot?.mainImageURL}`}></img>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (

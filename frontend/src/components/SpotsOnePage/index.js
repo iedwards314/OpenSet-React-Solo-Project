@@ -20,11 +20,16 @@ const SpotsOnePage = () => {
   }, [dispatch]);
 
   let reviews;
+  let userVeriSet = new Set();
   if(spot?.Reviews === undefined) {
     return null
   } else {
     reviews = spot?.Reviews
-    console.log(reviews);
+    // console.log(typeof(reviews[0]?.id));
+    reviews.forEach(review => {
+      userVeriSet.add(review?.id);
+    });
+    console.log("userVerificationSet userId is...", userVeriSet);
   }
 
   const createSpotButton = () => {
@@ -79,15 +84,6 @@ const SpotsOnePage = () => {
     }
   };
 
-  const editSpotButton = () => {
-    return (
-      <NavLink className="navButton" exact to="/spots/add">
-        Add Spot
-      </NavLink>
-    );
-
-  }
-
   const userEditFunc = (spot) => {
     if (!sessionUser) return;
     if (sessionUser.id === spot?.userId) {
@@ -116,20 +112,49 @@ const SpotsOnePage = () => {
     }
     else {
       if(reviews !== undefined){
-        return(
-        <>
+        if(reviews?.length > 0){
+          return(
+          <>
 
-        <ul className="review-box">
-         {reviews.map((userReview) =>
-          <li className='spot-reviews' key={`${userReview?.id}`}>
-            <h4 className='review-title'>{userReview?.username}</h4>
-            <div className="review-divider"></div>
-            <p className='review-text'>{userReview?.Review?.review}</p>
-           </li>)}
-        </ul>
-        </>
-        )
+          <ul className="review-box">
+           {reviews.map((userReview) =>
+            <li className='spot-reviews' key={`${userReview?.id}`}>
+              <h4 className='review-title'>{userReview?.username}</h4>
+              <div className="review-divider"></div>
+              <p className='review-text'>{userReview?.Review?.review}</p>
+             </li>)}
+          </ul>
+          </>
+          )
+        }
+        else {
+          return null
+        }
       }
+    }
+  }
+
+  const reviewButtons = (spot) => {
+    if(!sessionUser){
+      return null
+    }
+    else if (sessionUser.id === spot?.userId) {
+      return null
+    }
+    else if(userVeriSet.size > 0 && userVeriSet.has(sessionUser.id)){
+      return (
+        <button>Delete My Review</button>
+      )
+    }
+    else{
+      console.log("user can review")
+      console.log(userVeriSet.has(spot?.userId))
+      return(
+      <NavLink className="navButton" exact to={`/spots/${spot?.id}/reviewForm`}>
+        Add review
+      </NavLink>
+      )
+
     }
   }
 
@@ -141,6 +166,7 @@ const SpotsOnePage = () => {
       <div>{`Price: ${spot?.price}`}</div>
       <div>{`Address: ${spot?.address}, ${spot?.city}, ${spot?.country}`}</div>
       {userEditFunc(spot)}
+      {reviewButtons(spot)}
       {reviewsList(spot)}
     </>
   );

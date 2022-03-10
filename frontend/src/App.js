@@ -9,6 +9,8 @@ import SpotsListPage from "./components/SpotsListPage";
 import SpotsAddForm from "./components/SpotsAddForm";
 import SpotsOnePage from "./components/SpotsOnePage";
 import SpotsEditForm from "./components/SpotsEditform";
+import ReviewAddForm from "./components/ReviewsAddForm";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +35,9 @@ function App() {
           </Route>
           <Route isLoaded={isLoaded} path="/spots/:id/edit" exact>
             <SpotsEditForm />
+          </Route>
+          <Route isLoaded={isLoaded} path="/spots/:id/reviewform" exact>
+            <ReviewAddForm />
           </Route>
           <Route isLoaded={isLoaded} path="/spots/:id" exact>
             <SpotsOnePage />
