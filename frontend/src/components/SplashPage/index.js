@@ -17,9 +17,6 @@ const SplashPage = () => {
                 <div className="spec-img-container">
                   <img className="image-rounded" src="https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzV8fGJlYWNoJTIwaG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"></img>
                 </div>
-                <div className="caption">
-                    <h4 className="Splash-Genre">Older Homes</h4>
-                </div>
               </div>
             </a>
           </div>
