@@ -57,10 +57,10 @@ const SpotsListPage = ({ isLoaded }) => {
       {spotsArr.length <= 0 && <span>No Spots Available Right Now</span>}
       <ul className="spots-list">
         {spotsArr.map((spot) => (
-          <li key={spot.id}>
-            <h3>{spot.name}</h3>
+          <li key={spot?.id}>
+            <h3>{spot?.name}</h3>
             <NavLink to={`/spots/${spot.id}`}>
-              <img src={`${spot.mainImageURL}`} alt="movie set idea"></img>
+              <img src={`${spot?.mainImageURL}`} alt="movie set idea"></img>
             </NavLink>
               {userEditFunc(spot)}
           </li>

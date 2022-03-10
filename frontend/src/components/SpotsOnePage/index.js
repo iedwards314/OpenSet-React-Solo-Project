@@ -13,6 +13,9 @@ const SpotsOnePage = () => {
   let history = useHistory();
 
   const spot = useSelector((state) => state.spots[spotId]);
+  // console.log(spot);
+  // const reviews = useSelector((state) => state.reviews[spotId]);
+  // console.log(reviews)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -104,6 +107,13 @@ const SpotsOnePage = () => {
       <div>{`Address: ${spot?.address}, ${spot?.city}, ${spot?.country}`}</div>
 
       {spot ? <img className="image-spot" src={`${spot?.mainImageURL}`} alt="movie set idea"></img> : null}
+      <div className="reviewBox">
+      <ul>
+        <li>
+          <div>UserName: Review</div>
+        </li>
+      </ul>
+      </div>
       {userEditFunc(spot)}
     </>
   );

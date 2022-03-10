@@ -11,7 +11,11 @@ const router = express.Router();
 router.get(
   "/",
   asyncHandler(async function (req, res, next) {
-    const spots = await Spot.findAll();
+    const spots = await Spot.findAll({
+      include: {
+        model: User
+      }
+    });
     return res.json(spots);
   })
 );
@@ -39,16 +43,20 @@ const spotNotFoundError = (id) => {
 router.get(
   "/:id",
   asyncHandler(async function (req, res, next) {
+    //spotId is a STRING
     const spotId = req.params.id;
-    const spot = await Spot.findByPk(spotId);
+    const spot = await Spot.findByPk(spotId,
+      {
+      include: [
+        {
+          model: User,
+          as: "Reviews",
+        }
+      ]
+      }
+    );
     if (spot) {
-      const reviews = await Review.findAll({
-        where: {
-          spotId: spotId,
-        },
-      });
-      const responseObj = { spot, reviews };
-      res.json(responseObj);
+      res.json(spot);
     } else {
       next(spotNotFoundError(req.params.id));
     }
