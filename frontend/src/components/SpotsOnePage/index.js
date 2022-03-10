@@ -204,7 +204,7 @@ const SpotsOnePage = () => {
 
     if(destroyedSpot){
 
-      history.push(`/spots/${spot?.id}`);
+      history.push(`/spots`);
     }
 }
 
