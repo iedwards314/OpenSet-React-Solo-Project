@@ -28,18 +28,6 @@ const spotNotFoundError = (id) => {
   return err;
 };
 
-// router.get(
-//   "/:id",
-//   asyncHandler(async function (req, res, next) {
-//     const spot = await Spot.findByPk(req.params.id);
-//     if (spot) {
-//       res.json(spot);
-//     } else {
-//       next(spotNotFoundError(req.params.id));
-//     }
-//   })
-// );
-
 router.get(
   "/:id",
   asyncHandler(async function (req, res, next) {
@@ -51,6 +39,9 @@ router.get(
         {
           model: User,
           as: "Reviews",
+        },
+        {
+          model: Image
         }
       ]
       }

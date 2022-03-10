@@ -41,7 +41,7 @@ const SpotsListPage = ({ isLoaded }) => {
       return (
         <>
           <NavLink className="navButton" exact to={`/spots/${spot.id}/edit`}>
-            Edit
+            Edit Listing
           </NavLink>
         </>
       );
@@ -59,10 +59,11 @@ const SpotsListPage = ({ isLoaded }) => {
         {spotsArr.map((spot) => (
           <li key={spot?.id}>
             <h3>{spot?.name}</h3>
-            <NavLink to={`/spots/${spot.id}`}>
-              <img src={`${spot?.mainImageURL}`} alt="movie set idea"></img>
-            </NavLink>
+            <h4>{`Hosted By: ${spot.User ? spot.User.username : null}`}</h4>
               {userEditFunc(spot)}
+            <NavLink to={`/spots/${spot.id}`}>
+              <img className="spots-list-image" src={`${spot?.mainImageURL}`} alt="movie set idea"></img>
+            </NavLink>
           </li>
         ))}
       </ul>
