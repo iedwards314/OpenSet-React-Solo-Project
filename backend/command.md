@@ -9,7 +9,7 @@ npx dotenv sequelize db:migrate:undo
 //user seed
 npx sequelize seed:generate --name demo-user
 
-//Generate Set, images
+//Generate Spot, Image
 npx sequelize-cli model:generate --name Spot --attributes userId:integer,address:string,city:string,country:string,name:string,price:decimal
 
 npx sequelize-cli model:generate --name Image --attributes spotId:integer,url:string
@@ -18,6 +18,10 @@ npx sequelize-cli seed:generate --name Spots
 
 npx sequelize-cli seed:generate --name Images
 
+//Generate reviews
+npx sequelize-cli model:generate --name Review --attributes userId:integer,spotId:integer,review:text,rating:integer
+
+npx sequelize-cli seed:generate --name Reviews
 
 npx dotenv sequelize db:seed:undo:all
 npx dotenv sequelize-cli db:migrate:undo:all
@@ -28,3 +32,5 @@ heroku run npm run sequelize db:seed:undo:all
 heroku run npm run sequelize db:migrate:undo:all
 heroku run npm run sequelize db:migrate
 heroku run npm run sequelize db:seed:all
+
+git push heroku main

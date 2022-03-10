@@ -4,14 +4,18 @@ const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
 const { check } = require("express-validator");
 
-const { Spot, Image, User } = require("../../db/models");
+const { Spot, Image, User, Review } = require("../../db/models");
 
 const router = express.Router();
 
 router.get(
   "/",
   asyncHandler(async function (req, res, next) {
-    const spots = await Spot.findAll();
+    const spots = await Spot.findAll({
+      include: {
+        model: User
+      }
+    });
     return res.json(spots);
   })
 );
@@ -27,7 +31,21 @@ const spotNotFoundError = (id) => {
 router.get(
   "/:id",
   asyncHandler(async function (req, res, next) {
-    const spot = await Spot.findByPk(req.params.id);
+    //spotId is a STRING
+    const spotId = req.params.id;
+    const spot = await Spot.findByPk(spotId,
+      {
+      include: [
+        {
+          model: User,
+          as: "Reviews",
+        },
+        {
+          model: Image
+        }
+      ]
+      }
+    );
     if (spot) {
       res.json(spot);
     } else {
@@ -94,8 +112,8 @@ router.put(
     const price = req.body.price;
     const mainImageURL = req.body.mainImageURL;
     const spot = await Spot.findByPk(spotId);
-    if(spot){
-      if(userId === spot.userId){
+    if (spot) {
+      if (userId === spot.userId) {
         spot.address = address;
         spot.city = city;
         spot.country = country;
@@ -103,8 +121,7 @@ router.put(
         spot.price = price;
         spot.mainImageURL = mainImageURL;
         await spot.save();
-        res.json(spot)
-
+        res.json(spot);
       } else {
         const err = Error("Unauthorized user");
         err.errors = [`unauthorized delete`];
@@ -112,10 +129,9 @@ router.put(
         err.status = 401;
         return err;
       }
-    }else {
+    } else {
       next(spotNotFoundError(req.body.id));
     }
-
   })
 );
 

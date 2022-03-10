@@ -8,16 +8,24 @@ const SpotsOnePage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const spotParamObj = useParams();
   const spotId = spotParamObj.id;
-  const [errorMessages, setErrorMessages] = useState({});
   const [deletePrompt, setDeletePrompt] = useState(false);
   let history = useHistory();
 
   const spot = useSelector((state) => state.spots[spotId]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
       dispatch(getOneSpot(spotId));
   }, [dispatch]);
+
+  let reviews;
+  if(spot?.Reviews === undefined) {
+    return null
+  } else {
+    reviews = spot?.Reviews
+    console.log(reviews);
+  }
 
   const createSpotButton = () => {
     if (!sessionUser) {
@@ -96,15 +104,44 @@ const SpotsOnePage = () => {
     }
   };
 
+  const reviewsList = (spot) => {
+    if(!sessionUser) {
+      return (
+        <>
+          <h3>
+            Sign up to see reviews
+          </h3>
+        </>
+      )
+    }
+    else {
+      if(reviews !== undefined){
+        return(
+        <>
+
+        <ul className="review-box">
+         {reviews.map((userReview) =>
+          <li className='spot-reviews' key={`${userReview?.id}`}>
+            <h4 className='review-title'>{userReview?.username}</h4>
+            <div className="review-divider"></div>
+            <p className='review-text'>{userReview?.Review?.review}</p>
+           </li>)}
+        </ul>
+        </>
+        )
+      }
+    }
+  }
+
   return (
     <>
       {createSpotButton()}
       <h3>{spot?.name}</h3>
+      {spot ? <img className="spot-image" src={`${spot?.mainImageURL}`} alt="movie set idea"></img> : null}
       <div>{`Price: ${spot?.price}`}</div>
       <div>{`Address: ${spot?.address}, ${spot?.city}, ${spot?.country}`}</div>
-
-      {spot ? <img className="image-spot" src={`${spot?.mainImageURL}`} alt="movie set idea"></img> : null}
       {userEditFunc(spot)}
+      {reviewsList(spot)}
     </>
   );
 };
