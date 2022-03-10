@@ -4,6 +4,7 @@ import { Redirect, useHistory, useParams } from "react-router-dom";
 import { ValidationError } from "../utils/validationError";
 import ErrorMessage from "../utils/ErrorMessage";
 import { getOneSpot } from "../../store/spots";
+import { createReview } from "../../store/reviews";
 
 import * as sessionActions from "../../store/session";
 
@@ -37,24 +38,23 @@ function ReviewAddForm() {
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      const review = {
-        id: spotId,
+      const newReview = {
         userId: sessionUser.id,
+        spotId: spotId,
+        review,
         rating,
-        // review,
       };
-      console.log(review);
+      console.log(newReview);
       let addedReview;
       try {
-        // editedSpot = await dispatch(updateSpot(updatedSpot));
-        console.log("success");
+        addedReview = await dispatch(createReview(newReview));
       } catch (error) {
-        console.log("there was an error in the edit spot form");
+        setErrorMessages[error]="Database Error"
       }
       if (addedReview) {
         setErrorMessages({});
         setErrors([]);
-        history.push(`/spots/${spot?.id}`);
+        history.push(`/spots/${spot?.id}/`);
       }
     };
 
@@ -83,7 +83,8 @@ function ReviewAddForm() {
             </label>
             <label className="signup-form-label">
               <div className="signup-form-text">Review</div>
-              <input
+              <textarea
+                className="reviews-textarea"
                 type="text"
                 placeholder="Please let us know what you think"
                 value={review}
