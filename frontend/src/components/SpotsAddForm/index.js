@@ -26,19 +26,17 @@ function SpotsAddForm() {
         "Please update address to less than 255 characters"
       );
     if (city.length > 40)
-      return validationErrors.push("Please limit city to 40 characters");
+       validationErrors.push("Please limit city to 40 characters");
     if (country.length > 80)
-      return validationErrors.push("Please limit country to 80 characters");
+       validationErrors.push("Please limit country to 80 characters");
     if (name.length > 100)
-      return validationErrors.push("Please limit name to 100 characters");
+       validationErrors.push("Please limit name to 100 characters");
     setErrors(validationErrors);
   }, [address, city, country, name]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const roundedPrice = Math.round(price * 100) / 100;
-    const priceCheck = (typeof(roundedPrice))
-    console.log(priceCheck);
     const newSpot = {
       userId: sessionUser.id,
       address,
@@ -48,14 +46,13 @@ function SpotsAddForm() {
       price: roundedPrice,
       mainImageURL: image,
     };
-    //need to refactor the spot model to include a home image, then use the images table as secondary images
-    console.log(newSpot);
+
     let createdSpot;
     try {
       createdSpot = await dispatch(createSpot(newSpot));
     } catch (error) {
      console.log("there was an error in the handle submit spot form")
-     history.push("/spots/add")
+    //  history.push("/spots/add")
     }
     if(createSpot){
       setErrorMessages({});

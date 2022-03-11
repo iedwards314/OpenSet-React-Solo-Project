@@ -1,9 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import { NavLink, Route, useHistory, Redirect, Link, Switch } from "react-router-dom";
+import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { getSpots } from "../../store/spots";
 import "./SpotsListPage.css";
-import SpotsOnePage from "../SpotsOnePage";
 
 const SpotsListPage = ({ isLoaded }) => {
   // debugger

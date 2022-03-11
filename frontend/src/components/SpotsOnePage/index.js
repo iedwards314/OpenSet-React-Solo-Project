@@ -28,11 +28,9 @@ const SpotsOnePage = () => {
     return null
   } else {
     reviews = spot?.Reviews
-    // console.log(typeof(reviews[0]?.id));
     reviews.forEach(review => {
       userVeriSet.add(review?.id);
     });
-    console.log("userVerificationSet userId is...", userVeriSet);
   }
 
   const createSpotButton = () => {
