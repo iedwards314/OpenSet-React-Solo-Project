@@ -13,7 +13,7 @@ const SplashPage = () => {
       </div>
       <div className="Activity-select-container">
         <h1 className="splashHeader">Choose the Right Setting to Power Your Story</h1>
-          <img className="image-rounded" src="https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzV8fGJlYWNoJTIwaG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"></img>
+          <img className="image-rounded" src="https://images.unsplash.com/photo-1643651576156-c062a5b8c324?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fHR2JTIwcHJvZHVjdGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"></img>
       </div>
     </div>
   );

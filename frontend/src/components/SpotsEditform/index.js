@@ -66,7 +66,7 @@ function SpotsEditForm() {
 
   return (
     <>
-      <img src={`${spot?.mainImageURL}`}></img>
+      <img className="spot-image" src={`${spot?.mainImageURL}`}></img>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (

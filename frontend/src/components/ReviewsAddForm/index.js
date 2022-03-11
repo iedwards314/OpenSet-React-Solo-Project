@@ -56,7 +56,7 @@ function ReviewAddForm() {
 
     return (
       <>
-        <img src={`${spot?.mainImageURL}`} alt="a spot selection"></img>
+        <img className="spot-image" src={`${spot?.mainImageURL}`} alt="a spot selection"></img>
         <h2>{`${spot?.name}`}</h2>
         <form onSubmit={handleSubmit}>
           <ul>
