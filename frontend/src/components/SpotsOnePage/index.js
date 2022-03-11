@@ -122,6 +122,7 @@ const SpotsOnePage = () => {
             <li className='spot-reviews' key={`${userReview?.id}`}>
               <h4 className='review-title'>{userReview?.username}</h4>
               <div className="review-divider"></div>
+              <p className='review-text'>{userReview?.Review?.rating}</p>
               <p className='review-text'>{userReview?.Review?.review}</p>
              </li>)}
           </ul>

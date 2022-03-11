@@ -16,7 +16,7 @@ function Navigation({ isLoaded }){
       <ul className='navList'>
         <li className='navList-home'>
           <NavLink exact to="/">
-            <img href="" src={redLogo} alt="logo"></img>
+            <img className="img-logo" src={redLogo} alt="logo"></img>
           </NavLink>
         </li>
         <li className='navList-home'>
@@ -32,11 +32,13 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <ul className='navList'>
         <li className='navList-home'>
-          <NavLink className='navButton' exact to="/">Home</NavLink>
+          <NavLink exact to="/">
+            <img className="img-logo" src={redLogo} alt="logo"></img>
+          </NavLink>
         </li>
         <li className='navList-item'>
           <LoginFormModal />
-          <NavLink className='navButton'to="/signup">Sign Up</NavLink>
+          <NavLink className='navButton-signUp'to="/signup">Sign Up</NavLink>
         </li>
       </ul>
     );
