@@ -40,7 +40,7 @@ const SpotsListPage = ({ isLoaded }) => {
       return (
         <>
           <NavLink className="navButton" exact to={`/spots/${spot.id}/edit`}>
-            Edit Listing
+            Edit
           </NavLink>
         </>
       );

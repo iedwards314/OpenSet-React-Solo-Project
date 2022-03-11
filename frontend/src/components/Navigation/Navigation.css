@@ -4,7 +4,12 @@ nav {
     justify-content: center;
     height: 100px;
     width: 100%;
+    z-index: 1;
+}
 
+.img-logo{
+    height: 60px;
+    width: 200px;
 }
 
 .navList {
@@ -14,6 +19,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+
 }
 
 .navButton {
@@ -36,8 +42,28 @@ nav {
 
 .navList-item {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.navButton-signUp{
+    display: block;
+    width: 115px;
+    height: 35px;
+    background: transparent;
+    outline: solid #767676;
+    outline-width: thin;
+    text-align: center;
+    color: #484848;
+    font-weight: bold;
+    line-height: 25px;
+    border-radius: 20px;
+    padding: 5px 20px;
+    margin: 10px 10px;
+    text-decoration: none;
+    background-color: #FF5A5F;
+    color: #FFFFFF;
+    font-weight: bold;
 }

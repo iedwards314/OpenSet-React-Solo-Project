@@ -122,6 +122,7 @@ const SpotsOnePage = () => {
             <li className='spot-reviews' key={`${userReview?.id}`}>
               <h4 className='review-title'>{userReview?.username}</h4>
               <div className="review-divider"></div>
+              <p className='review-text'>Rating: {userReview?.Review?.rating}</p>
               <p className='review-text'>{userReview?.Review?.review}</p>
              </li>)}
           </ul>
@@ -161,17 +162,15 @@ const SpotsOnePage = () => {
       } else {
           return (
           <>
-              <button className="btn-cancel-delete" onClick={() => setReviewDeletePrompt(true)}>Delete My Review</button>
+              <button className="btn-review-delete" onClick={() => setReviewDeletePrompt(true)}>Delete My Review</button>
           </>
           )
 
       }
     }
     else{
-      console.log("user can review")
-      console.log(userVeriSet.has(spot?.userId))
       return(
-      <NavLink className="navButton" exact to={`/spots/${spot?.id}/reviewForm`}>
+      <NavLink className="btn-add-review" exact to={`/spots/${spot?.id}/reviewForm`}>
         Add review
       </NavLink>
       )
@@ -186,8 +185,6 @@ const SpotsOnePage = () => {
       let review = reviews[i];
       if(review?.id === sessionUser.id){
         userReview = reviews[i];
-        console.log("spotId is...", userReview.Review.id);
-        console.log("userId is...", userReview.id);
         break
       }
     }

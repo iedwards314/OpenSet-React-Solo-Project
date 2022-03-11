@@ -9,6 +9,27 @@
     width: 150px;
 }
 
+.btn-add-review{
+    display: block;
+    height: 35px;
+    background: transparent;
+    outline: solid #767676;
+    outline-width: thin;
+    text-align: center;
+    color: #484848;
+    font-weight: bold;
+    line-height: 25px;
+    border-radius: 20px;
+    padding: 5px 20px;
+    margin: 10px 10px;
+    text-decoration: none;
+    width: 150px;
+}
+
+.btn-review-delete {
+    width: 200px;
+}
+
 .spot-image {
     width: 750px;
     height: 650px;
