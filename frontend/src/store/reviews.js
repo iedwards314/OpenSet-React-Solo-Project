@@ -1,10 +1,19 @@
 import { ValidationError } from "../components/utils/validationError";
 import { csrfFetch } from "./csrf";
 
+const REVIEWSLIST = "reviews/REVIEWSLIST";
 const GET_REVIEW = "reviews/GET_REVIEW";
 const ADD_REVIEW = "reviews/ADD_REVIEW";
 const REMOVE_REVIEW = "reviews/REMOVE_REVIEW";
 const UPDATE_REVIEW = "reviews/UPDATE_REVIEW";
+
+//list action creator
+export const reviewsList = (reviews) => {
+    return {
+      type: REVIEWSLIST,
+      reviews,
+    };
+  };
 
 export const getOne = (review) => {
   return {
@@ -33,6 +42,23 @@ export const updateOne = (review) => {
     review,
   };
 };
+
+export const getReviews = () => async dispatch => {
+    const response = await fetch("/api/reviews");
+    if (response.ok) {
+      const list = await response.json();
+      dispatch(reviewsList(list));
+    }
+  };
+
+//get one review thunk
+export const getOneReview = (id) => async dispatch => {
+    const response = await fetch(`/api/reviews/${id}`);
+    if (response.ok) {
+      const review = await response.json();
+      dispatch(getOne(review));
+    }
+  };
 
 //create review thunk
 
@@ -74,26 +100,44 @@ export const createReview = (data) => async (dispatch) => {
   }
 };
 
-const reviewsReducer = (state = {}, action) => {
-    switch (action.type) {
-        case ADD_REVIEW:
-            const newState = {
-              ...state,
-              [action.review.id]: action.review,
-            };
-            return newState;
-          case GET_REVIEW: {
-            return {
-              ...state,
-              [action.review.id]: {
-                ...state[action.review.id],
-                ...action.review,
-              },
-            };
-          }
-      default:
-        return state;
-    }
-  };
+//DESTROY REVIEW
+export const removeReview = (review) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews/${review.id}`, {
+    method: "delete",
+  });
+  if (response.ok) {
+    const destroyedReview = await response.json();
+    dispatch(removeOne(destroyedReview.id));
+    return destroyedReview;
+  }
+  return response;
+};
 
-  export default reviewsReducer;
+const reviewsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADD_REVIEW:
+      const newState = {
+        ...state,
+        [action.review.id]: action.review,
+      };
+      return newState;
+    case GET_REVIEW: {
+      return {
+        ...state,
+        [action.review.id]: {
+          ...state[action.review.id],
+          ...action.review,
+        },
+      };
+    }
+    case REMOVE_REVIEW: {
+      const newState = { ...state };
+      delete newState[action.id];
+      return newState;
+    }
+    default:
+      return state;
+  }
+};
+
+export default reviewsReducer;

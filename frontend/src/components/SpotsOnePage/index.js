@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { getOneSpot, removeSpot } from "../../store/spots";
+import { removeReview } from "../../store/reviews";
 import "./SpotsOnePage.css";
 
 const SpotsOnePage = () => {
@@ -9,6 +10,8 @@ const SpotsOnePage = () => {
   const spotParamObj = useParams();
   const spotId = spotParamObj.id;
   const [deletePrompt, setDeletePrompt] = useState(false);
+  const [deleteReviewPrompt, setReviewDeletePrompt] = useState(false);
+
   let history = useHistory();
 
   const spot = useSelector((state) => state.spots[spotId]);
@@ -142,9 +145,29 @@ const SpotsOnePage = () => {
       return null
     }
     else if(userVeriSet.size > 0 && userVeriSet.has(sessionUser.id)){
-      return (
-        <button>Delete My Review</button>
-      )
+
+      if (deleteReviewPrompt === true) {
+        return (
+          <>
+          <ul>
+              <li>
+                  <button
+                  type="submit"
+                  onClick={destroyReviewButton}
+                  className="btn-confirm-delete">Confirm Delete</button>
+                  <button className="btn-cancel-delete" onClick={() => setReviewDeletePrompt(false)}>Cancel Delete</button>
+              </li>
+          </ul>
+          </>
+        );
+      } else {
+          return (
+          <>
+              <button className="btn-cancel-delete" onClick={() => setReviewDeletePrompt(true)}>Delete My Review</button>
+          </>
+          )
+
+      }
     }
     else{
       console.log("user can review")
@@ -157,6 +180,33 @@ const SpotsOnePage = () => {
 
     }
   }
+
+  const destroyReviewButton = async (e) => {
+    e.preventDefault();
+    let userReview = {};
+    for (let i = 0; i < reviews.length; i++){
+      let review = reviews[i];
+      if(review?.id === sessionUser.id){
+        userReview = reviews[i];
+        console.log("spotId is...", userReview.Review.id);
+        console.log("userId is...", userReview.id);
+        break
+      }
+    }
+    //create a getOne dispatch method to find the exact review. Then destroy it.
+    const payload = {
+        id: userReview.Review.id,
+        userId: userReview.id,
+    }
+    let destroyedSpot
+    destroyedSpot = await dispatch(removeReview(payload))
+    .catch (error => (console.log("error in delete")))
+
+    if(destroyedSpot){
+
+      history.push(`/spots`);
+    }
+}
 
   return (
     <>
