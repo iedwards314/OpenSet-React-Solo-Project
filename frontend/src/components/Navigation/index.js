@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
-import redLogo from '../../../public/logo/OpenSet-Red-Logo.png'
+import redLogo from '../../logo/OpenSet-Red-Logo.png'
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
