@@ -4,7 +4,7 @@ const SplashPage = () => {
       <div className="img-container">
         <img
           src="https://images.unsplash.com/photo-1585951237318-9ea5e175b891?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fGNvb2x8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
-          alt="image of a movie clp bord and film"
+          alt="movie clp bord and film"
         ></img>
       </div>
       <div className="Activity-select-container">

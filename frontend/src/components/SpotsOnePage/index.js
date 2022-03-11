@@ -161,15 +161,13 @@ const SpotsOnePage = () => {
       } else {
           return (
           <>
-              <button className="btn-cancel-delete" onClick={() => setReviewDeletePrompt(true)}>Delete My Review</button>
+              <button className="btn-review-delete" onClick={() => setReviewDeletePrompt(true)}>Delete My Review</button>
           </>
           )
 
       }
     }
     else{
-      console.log("user can review")
-      console.log(userVeriSet.has(spot?.userId))
       return(
       <NavLink className="navButton" exact to={`/spots/${spot?.id}/reviewForm`}>
         Add review
@@ -186,8 +184,6 @@ const SpotsOnePage = () => {
       let review = reviews[i];
       if(review?.id === sessionUser.id){
         userReview = reviews[i];
-        console.log("spotId is...", userReview.Review.id);
-        console.log("userId is...", userReview.id);
         break
       }
     }

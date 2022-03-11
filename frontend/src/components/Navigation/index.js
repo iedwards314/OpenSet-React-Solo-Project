@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
+import redLogo from '../../../public/logo/OpenSet-Red-Logo.png'
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -11,9 +12,12 @@ function Navigation({ isLoaded }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
+      <>
       <ul className='navList'>
         <li className='navList-home'>
-          <NavLink className='navButton'exact to="/">Home</NavLink>
+          <NavLink exact to="/">
+            <img href="" src={redLogo} alt="logo"></img>
+          </NavLink>
         </li>
         <li className='navList-home'>
           <NavLink className='navButton' exact to="/spots">Spots</NavLink>
@@ -22,6 +26,7 @@ function Navigation({ isLoaded }){
           <ProfileButton user={sessionUser} />
         </li>
       </ul>
+      </>
     );
   } else {
     sessionLinks = (

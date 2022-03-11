@@ -9,6 +9,11 @@
     width: 150px;
 }
 
+.btn-review-delete {
+    width: 200px;
+    color: blue;
+}
+
 .spot-image {
     width: 750px;
     height: 650px;
