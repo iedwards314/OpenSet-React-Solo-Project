@@ -78,7 +78,7 @@ function SignupFormPage() {
           required
         />
       </label>
-      <button type="submit" className="btn-Log-in-Log-out">Sign Up</button>
+      <button type="submit" className="btn-Log-in-Log-out">Create</button>
       </div>
     </form>
   );
