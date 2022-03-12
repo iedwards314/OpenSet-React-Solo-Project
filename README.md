@@ -58,21 +58,21 @@ To View a spot or the spots list:
    - Click the `Spots` button at the top of the homepage to view the spots list
    - Click the `image` of the spot to navigate to the individual spot details
    - Details include:
-      1. Name of the Spot
-      2. Price
-      3. Address
-      4. List of reviews (if there are any)
+      1. `Name` of the Spot
+      2. `Price`
+      3. `Address`
+      4. `List of reviews` (if there are any)
 
 To Add a spot:
    - Click the `Spots` button at the top of the homepage
    - Click the `Add Spot` button at the top left of the Spots page
    - Fill out the added form:
-      1. Name (required with max length is 100 characters)
-      2. Price (required and the price will be rounded to the nearest $0.01)
-      3. Image URL (required to insert a link)
-      4. Address (required with a max length of 255 characters)
-      5. City (required with a max length of 40 characters)
-      6. Country (required with a max length of 80 characters)
+      1. `Name` (required with max length is 100 characters)
+      2. `Price` (required and the price will be rounded to the nearest $0.01)
+      3. `Image URL` (required to insert a link)
+      4. `Address` (required with a max length of 255 characters)
+      5. `City` (required with a max length of 40 characters)
+      6. `Country` (required with a max length of 80 characters)
 
 To Edit a Spot
    - (Option 1) Click the `image` button of the spot that the user created to navigate to the individual spot details
