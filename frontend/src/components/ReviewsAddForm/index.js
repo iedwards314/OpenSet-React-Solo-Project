@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ErrorMessage from "../utils/ErrorMessage";
 import { getOneSpot } from "../../store/spots";
 import { createReview } from "../../store/reviews";
+import "./ReviewsAddForm.css";
 
 function ReviewAddForm() {
     const spotParamObj = useParams();
@@ -58,8 +59,8 @@ function ReviewAddForm() {
       <>
         <img className="spot-image" src={`${spot?.mainImageURL}`} alt="a spot selection"></img>
         <h2>{`${spot?.name}`}</h2>
-        <form onSubmit={handleSubmit}>
-          <ul>
+        <form className="review-form" onSubmit={handleSubmit}>
+          <ul className="errors">
             {errors.map((error, idx) => (
               <li key={idx}>{error}</li>
             ))}
@@ -82,7 +83,7 @@ function ReviewAddForm() {
               <textarea
                 className="reviews-textarea"
                 type="text"
-                placeholder="Please let us know what you think"
+                placeholder="Write review here..."
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
                 required

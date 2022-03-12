@@ -1,4 +1,15 @@
 .reviews-textarea{
-    width: 650px;
-    height: 250px;
+    margin: 5px;
+    padding: 5px;
+    width: 450px;
+    height: 150px;
+}
+
+.review-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+    width: 500px;
 }
