@@ -19,16 +19,16 @@ const SpotsOnePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(getOneSpot(spotId));
+    dispatch(getOneSpot(spotId));
   }, [dispatch]);
 
   let reviews;
   let userVeriSet = new Set();
-  if(spot?.Reviews === undefined) {
-    return null
+  if (spot?.Reviews === undefined) {
+    return null;
   } else {
-    reviews = spot?.Reviews
-    reviews.forEach(review => {
+    reviews = spot?.Reviews;
+    reviews.forEach((review) => {
       userVeriSet.add(review?.id);
     });
   }
@@ -46,42 +46,50 @@ const SpotsOnePage = () => {
   };
 
   const destroySpotButton = async (e) => {
-      e.preventDefault();
-      const payload = {
-          userId: sessionUser.id,
-          id: spot?.id
-      }
-      let destroyedSpot
-      destroyedSpot = await dispatch(removeSpot(payload))
-      .catch (error => (console.log("error in delete")))
+    e.preventDefault();
+    const payload = {
+      userId: sessionUser.id,
+      id: spot?.id,
+    };
+    let destroyedSpot;
+    destroyedSpot = await dispatch(removeSpot(payload)).catch((error) =>
+      console.log("error in delete")
+    );
 
-      if(destroyedSpot.id){
-        history.push("/spots/");
-      }
-  }
+    if (destroyedSpot.id) {
+      history.push("/spots/");
+    }
+  };
 
   const showDeleteButtons = () => {
     if (deletePrompt === true) {
       return (
         <>
-        <ul>
+          <ul>
             <li>
-                <button
+              <button
                 type="submit"
                 onClick={destroySpotButton}
-                className="btn-confirm-delete">Confirm Delete</button>
-                <button className="btn-cancel-delete" onClick={() => setDeletePrompt(false)}>Cancel Delete</button>
+                className="btn-confirm-delete"
+              >
+                Confirm Delete
+              </button>
+              <button
+                className="btn-cancel-delete"
+                onClick={() => setDeletePrompt(false)}
+              >
+                Cancel Delete
+              </button>
             </li>
-        </ul>
+          </ul>
         </>
       );
     } else {
-        return (
+      return (
         <>
-            <button onClick={() => setDeletePrompt(true)}>Delete</button>
+          <button onClick={() => setDeletePrompt(true)}>Delete</button>
         </>
-        )
-
+      );
     }
   };
 
@@ -102,117 +110,140 @@ const SpotsOnePage = () => {
   };
 
   const reviewsList = (spot) => {
-    if(!sessionUser) {
+    if (!sessionUser) {
       return (
         <>
-          <h3>
-            Sign up to see reviews
-          </h3>
+          <h3>Sign up to see reviews</h3>
         </>
-      )
-    }
-    else {
-      if(reviews !== undefined){
-        if(reviews?.length > 0){
-          return(
-          <>
-
-          <ul className="review-box">
-           {reviews.map((userReview) =>
-            <li className='spot-reviews' key={`${userReview?.id}`}>
-              <h4 className='review-title'>{userReview?.username}</h4>
-              <div className="review-divider"></div>
-              <p className='review-text'>Rating: {userReview?.Review?.rating}</p>
-              <p className='review-text'>{userReview?.Review?.review}</p>
-             </li>)}
-          </ul>
-          </>
-          )
-        }
-        else {
-          return null
+      );
+    } else {
+      if (reviews !== undefined) {
+        if (reviews?.length > 0) {
+          return (
+            <>
+              <ul className="review-box">
+                <li className="spot-reviews">
+                  <h4 className="review-header">User</h4>
+                  <h4 className="review-header">Rating</h4>
+                  <h4 className="review-header">Comment</h4>
+                </li>
+                {reviews.map((userReview) => (
+                  <li className="spot-reviews" key={`${userReview?.id}`}>
+                    <p className="review-title">{userReview?.username}:</p>
+                    <p className="review-rating">
+                      Rating: {userReview?.Review?.rating} /10 -
+                    </p>
+                    <p className="review-text">{userReview?.Review?.review}</p>
+                  </li>
+                ))}
+              </ul>
+            </>
+          );
+        } else {
+          return null;
         }
       }
     }
-  }
+  };
 
   const reviewButtons = (spot) => {
-    if(!sessionUser){
-      return null
-    }
-    else if (sessionUser.id === spot?.userId) {
-      return null
-    }
-    else if(userVeriSet.size > 0 && userVeriSet.has(sessionUser.id)){
-
+    if (!sessionUser) {
+      return null;
+    } else if (sessionUser.id === spot?.userId) {
+      return null;
+    } else if (userVeriSet.size > 0 && userVeriSet.has(sessionUser.id)) {
       if (deleteReviewPrompt === true) {
         return (
           <>
-          <ul>
+            <ul>
               <li>
-                  <button
+                <button
                   type="submit"
                   onClick={destroyReviewButton}
-                  className="btn-confirm-delete">Confirm Delete</button>
-                  <button className="btn-cancel-delete" onClick={() => setReviewDeletePrompt(false)}>Cancel Delete</button>
+                  className="btn-confirm-delete"
+                >
+                  Confirm Delete
+                </button>
+                <button
+                  className="btn-cancel-delete"
+                  onClick={() => setReviewDeletePrompt(false)}
+                >
+                  Cancel Delete
+                </button>
               </li>
-          </ul>
+            </ul>
           </>
         );
       } else {
-          return (
+        return (
           <>
-              <button className="btn-review-delete" onClick={() => setReviewDeletePrompt(true)}>Delete My Review</button>
+            <button
+              className="btn-review-delete"
+              onClick={() => setReviewDeletePrompt(true)}
+            >
+              Delete My Review
+            </button>
           </>
-          )
-
+        );
       }
+    } else {
+      return (
+        <NavLink
+          className="btn-add-review"
+          exact
+          to={`/spots/${spot?.id}/reviewForm`}
+        >
+          Add review
+        </NavLink>
+      );
     }
-    else{
-      return(
-      <NavLink className="btn-add-review" exact to={`/spots/${spot?.id}/reviewForm`}>
-        Add review
-      </NavLink>
-      )
-
-    }
-  }
+  };
 
   const destroyReviewButton = async (e) => {
     e.preventDefault();
     let userReview = {};
-    for (let i = 0; i < reviews.length; i++){
+    for (let i = 0; i < reviews.length; i++) {
       let review = reviews[i];
-      if(review?.id === sessionUser.id){
+      if (review?.id === sessionUser.id) {
         userReview = reviews[i];
-        break
+        break;
       }
     }
     //create a getOne dispatch method to find the exact review. Then destroy it.
     const payload = {
-        id: userReview.Review.id,
-        userId: userReview.id,
-    }
-    let destroyedSpot
-    destroyedSpot = await dispatch(removeReview(payload))
-    .catch (error => (console.log("error in delete")))
+      id: userReview.Review.id,
+      userId: userReview.id,
+    };
+    let destroyedSpot;
+    destroyedSpot = await dispatch(removeReview(payload)).catch((error) =>
+      console.log("error in delete")
+    );
 
-    if(destroyedSpot){
-
+    if (destroyedSpot) {
       history.push(`/spots`);
     }
-}
+  };
 
   return (
     <>
       {createSpotButton()}
-      <h3>{spot?.name}</h3>
-      {spot ? <img className="spot-image" src={`${spot?.mainImageURL}`} alt="movie set idea"></img> : null}
-      <div>{`Price: ${spot?.price}`}</div>
-      <div>{`Address: ${spot?.address}, ${spot?.city}, ${spot?.country}`}</div>
-      {userEditFunc(spot)}
-      {reviewButtons(spot)}
-      {reviewsList(spot)}
+      {spot ? (
+        <div className="spot-image-container">
+          <img
+            className="spot-image"
+            src={`${spot?.mainImageURL}`}
+            alt="movie set idea"
+          ></img>
+        </div>
+      ) : null}
+      <div className="spot-details-container">
+        <h3 className="spot-title">{spot?.name}</h3>
+        <div className="spot-price">{`Price: ${spot?.price}`}</div>
+        <div className="spot-details">{`Address: ${spot?.address}, ${spot?.city}, ${spot?.country}`}</div>
+        {userEditFunc(spot)}
+        {reviewButtons(spot)}
+        {reviewsList(spot)}
+      </div>
     </>
   );
 };
