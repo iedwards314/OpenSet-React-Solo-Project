@@ -49,11 +49,9 @@ function SpotsEditForm() {
       price: roundedPrice,
       mainImageURL: image,
     };
-    console.log(updatedSpot);
     let editedSpot;
     try {
         editedSpot = await dispatch(updateSpot(updatedSpot));
-      console.log("success");
     } catch (error) {
       console.log("there was an error in the edit spot form");
     }

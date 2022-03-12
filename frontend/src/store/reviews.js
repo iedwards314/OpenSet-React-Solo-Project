@@ -95,7 +95,7 @@ export const createReview = (data) => async (dispatch) => {
     dispatch(addOne(review));
     return review;
   } catch (error) {
-    console.log("error in create thunk");
+    console.log("error in create review");
     throw error;
   }
 };
