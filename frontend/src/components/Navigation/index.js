@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
             <img className="img-logo" src={redLogo} alt="logo"></img>
           </NavLink>
         </li>
-        <li className='navList-home'>
+        <li className='navList-spots'>
           <NavLink className='navButton' exact to="/spots">Spots</NavLink>
         </li>
         <li className='navList-item'>

@@ -2,6 +2,77 @@
     border-radius: 10%;
     padding: 5px;
     margin: 5px;
-    height: 650px;
-    width: 750px;
+    height: 350px;
+    width: 350px;
+}
+
+.spot-list-header {
+    font-size: 24px;
+}
+
+.spots-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+}
+
+.spot-host {
+    font-size: 10px;
+}
+
+.spot-name {
+    font-size: 14px;
+}
+
+.editButton {
+    display: block;
+    width: 80px;
+    height: 30px;
+    background: transparent;
+    outline: solid #767676;
+    outline-width: thin;
+    text-align: center;
+    color: #484848;
+    font-weight: bold;
+    line-height: 25px;
+    border-radius: 20px;
+    padding: 5px 20px;
+    margin: 10px 10px;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.editButton:hover {
+    color: #0088a9;
+}
+
+.add-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.addButton {
+    display: block;
+    width: 100px;
+    height: 30px;
+    background: transparent;
+    outline: solid #767676;
+    outline-width: thin;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+    border-radius: 20px;
+    padding: 5px 20px;
+    margin: 10px 10px;
+    text-decoration: none;
+    font-size: 12px;
+    background-color: #FF5A5F;
+}
+
+.addButton:hover {
+    color: #0088a9;
+
 }

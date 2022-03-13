@@ -27,9 +27,13 @@ const SpotsListPage = ({ isLoaded }) => {
       return null;
     } else {
       return (
-        <NavLink className="navButton" exact to="/spots/add">
+        <>
+        <div className="add-button-container">
+        <NavLink className="addButton" exact to="/spots/add">
           Add Spot
         </NavLink>
+        </div>
+        </>
       );
     }
   };
@@ -39,7 +43,7 @@ const SpotsListPage = ({ isLoaded }) => {
     if (sessionUser.id === spot.userId) {
       return (
         <>
-          <NavLink className="navButton" exact to={`/spots/${spot.id}/edit`}>
+          <NavLink className="editButton" exact to={`/spots/${spot.id}/edit`}>
             Edit
           </NavLink>
         </>
@@ -51,21 +55,23 @@ const SpotsListPage = ({ isLoaded }) => {
 
   return (
     <>
-      <h2>Spots List</h2>
+      <h2 className="spot-list-header">Spots List</h2>
+      <div className="spots-list-container">
       {createSpotButton()}
       {spotsArr.length <= 0 && <span>No Spots Available Right Now</span>}
       <ul className="spots-list">
         {spotsArr.map((spot) => (
-          <li key={spot?.id}>
-            <h3>{spot?.name}</h3>
-            <h4>{`Hosted By: ${spot.User ? spot.User.username : null}`}</h4>
-              {userEditFunc(spot)}
+          <li className="spot-item-container" key={spot?.id}>
             <NavLink to={`/spots/${spot.id}`}>
               <img className="spots-list-image" src={`${spot?.mainImageURL}`} alt="movie set idea"></img>
             </NavLink>
+            <h3 className="spot-name">{spot?.name}</h3>
+            <h4 className="spot-host">{`Hosted By: ${spot.User ? spot.User.username : null}`}</h4>
+              {userEditFunc(spot)}
           </li>
         ))}
       </ul>
+      </div>
     </>
   );
 };

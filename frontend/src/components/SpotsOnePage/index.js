@@ -38,9 +38,14 @@ const SpotsOnePage = () => {
       return null;
     } else {
       return (
-        <NavLink className="navButton" exact to="/spots/add">
+        <>
+        <div className="add-button-container">
+        <NavLink className="addButton" exact to="/spots/add">
           Add Spot
         </NavLink>
+        </div>
+
+        </>
       );
     }
   };
