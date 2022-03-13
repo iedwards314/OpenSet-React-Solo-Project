@@ -1,9 +1,10 @@
 nav {
     display: flex;
+    top: 0;
     align-items: center;
     justify-content: space-between;
-    padding: 30px 10%;
-    height: 100px;
+    padding: 20px 10%;
+    height: 140px;
     width: 100%;
 }
 
@@ -82,8 +83,4 @@ nav {
     background-color: #FF5A5F;
     color: #FFFFFF;
     font-weight: bold;
-}
-
-.profile-dropdown {
-
 }

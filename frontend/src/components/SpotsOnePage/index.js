@@ -28,7 +28,6 @@ const SpotsOnePage = () => {
     return null;
   } else {
     reviews = spot?.Reviews;
-    console.log(reviews);
     reviews.forEach((review) => {
       userVeriSet.add(review?.id);
     });
