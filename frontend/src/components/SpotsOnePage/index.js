@@ -130,11 +130,11 @@ const SpotsOnePage = () => {
               <ul className="review-box">
                 {reviews.map((userReview) => (
                   <li className="spot-reviews" key={`${userReview?.id}`}>
-                    {userReview ? (
+                    {userReview.profilePicture ? (
                       <div className="user-image-container">
                         <img
                           className="user-image"
-                          src={`${userReview?.profilePicture}`}
+                          src={`${userReview.profilePicture}`}
                           alt="user profile picture"
                         ></img>
                       </div>
