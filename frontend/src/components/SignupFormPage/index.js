@@ -36,23 +36,23 @@ function SignupFormPage() {
       <div className="sign-up-form">
       <label className='signup-form-label'>
         <div className='signup-form-text'>
-          Email
-        </div>
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label className='signup-form-label'>
-        <div className='signup-form-text'>
           Username
         </div>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+      </label>
+      <label className='signup-form-label'>
+        <div className='signup-form-text'>
+          Email
+        </div>
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
       </label>
