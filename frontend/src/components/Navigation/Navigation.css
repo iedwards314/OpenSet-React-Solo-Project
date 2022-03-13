@@ -1,10 +1,11 @@
 nav {
     display: flex;
+    top: 0;
     align-items: center;
-    justify-content: center;
-    height: 100px;
+    justify-content: space-between;
+    padding: 20px 10%;
+    height: 140px;
     width: 100%;
-    z-index: 1;
 }
 
 .img-logo{
@@ -16,10 +17,25 @@ nav {
     display: flex;
     width: 99%;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
+}
 
+.navList li a {
+    transition: all 0.3s ease 0s;
+}
+
+.navList li a:hover {
+    color: #0088a9;
+}
+
+.navList li button {
+    transition: all 0.3s ease 0s;
+}
+
+.navList-home {
+    margin-right: auto;
 }
 
 .navButton {
@@ -40,12 +56,13 @@ nav {
 
 }
 
+.navButton:hover {
+    color: #0088a9;
+}
+
 .navList-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    display: inline-block;
+    padding: 0px 20px;
 }
 
 .navButton-signUp{

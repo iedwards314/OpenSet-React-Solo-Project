@@ -14,7 +14,7 @@ module.exports = {
       },
       {
         email: 'user1@user.io',
-        username: 'FakeUser1',
+        username: 'producerUser',
         hashedPassword: bcrypt.hashSync('password2'),
         profilePicture: "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/252.jpg",
         job: "Producer",
@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         email: 'user2@user.io',
-        username: 'FakeUser2',
+        username: 'directorUser',
         hashedPassword: bcrypt.hashSync('password3'),
         profilePicture: "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1212.jpg",
         job: "Director",
@@ -30,7 +30,7 @@ module.exports = {
       },
       {
         email: 'user3@user.io',
-        username: 'FakeUser3',
+        username: 'scoutUser',
         hashedPassword: bcrypt.hashSync('password4'),
         profilePicture: "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/794.jpg",
         job: "Location Scout",
