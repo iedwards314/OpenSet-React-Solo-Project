@@ -28,6 +28,7 @@ const SpotsOnePage = () => {
     return null;
   } else {
     reviews = spot?.Reviews;
+    console.log(reviews);
     reviews.forEach((review) => {
       userVeriSet.add(review?.id);
     });
@@ -126,22 +127,26 @@ const SpotsOnePage = () => {
         if (reviews?.length > 0) {
           return (
             <>
+            <div className="review-box-container">
               <ul className="review-box">
-                <li className="spot-reviews">
-                  <h4 className="review-header">User</h4>
-                  <h4 className="review-header">Rating</h4>
-                  <h4 className="review-header">Comment</h4>
-                </li>
                 {reviews.map((userReview) => (
                   <li className="spot-reviews" key={`${userReview?.id}`}>
+                    {userReview ? (
+                      <div className="user-image-container">
+                        <img
+                          className="user-image"
+                          src={`${userReview?.profilePicture}`}
+                          alt="user profile picture"
+                        ></img>
+                      </div>
+                    ) : null}
                     <p className="review-title">{userReview?.username}:</p>
-                    <p className="review-rating">
-                      Rating: {userReview?.Review?.rating} /10 -
-                    </p>
-                    <p className="review-text">{userReview?.Review?.review}</p>
+                    <p className="review-text">
+                    {`${userReview?.Review?.review} (${userReview?.Review?.rating}  / 10)`}</p>
                   </li>
                 ))}
               </ul>
+            </div>
             </>
           );
         } else {
@@ -231,6 +236,8 @@ const SpotsOnePage = () => {
 
   return (
     <>
+    <div className="spot-container">
+
       {createSpotButton()}
       {spot ? (
         <div className="spot-image-container">
@@ -249,6 +256,7 @@ const SpotsOnePage = () => {
         {reviewButtons(spot)}
         {reviewsList(spot)}
       </div>
+    </div>
     </>
   );
 };

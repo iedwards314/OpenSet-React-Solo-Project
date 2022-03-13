@@ -29,6 +29,11 @@
 .btn-review-delete {
     width: 200px;
 }
+
+.spot-container {
+    width: 80%;
+    align-items: center;
+}
 .spot-image-container{
     display: flex;
     justify-content: center;
@@ -39,11 +44,27 @@
 }
 
 .spot-image {
-    width: 750px;
-    height: 650px;
+    width: 650px;
+    height: 550px;
     padding: 5px;
     margin: 5px;
     border-radius: 10%;
+}
+
+.spot-price {
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.spot-details {
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.review-box-container {
+    display: flex;
 }
 
 .review-box{
@@ -58,9 +79,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: solid #767676;
+    margin: 5px;
 }
 
+.user-image {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
 .review-title{
     margin: 5px 5px 10px 10px;
     color: #00A699;
