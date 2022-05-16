@@ -38,6 +38,10 @@ nav {
     margin-right: auto;
 }
 
+.nav-button-container{
+    display: flex;
+}
+
 .navButton {
     display: block;
     width: 115px;
@@ -83,4 +87,30 @@ nav {
     background-color: #FF5A5F;
     color: #FFFFFF;
     font-weight: bold;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    position: absolute;
+    color: #FFFFFF;
+    background-color: #767676;
+    border-radius: 10px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content-item{
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content-item button {
+    background-color: #FF5A5F;
+    color: #FFFFFF;
 }
