@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import { useDispatch } from "react-redux";
+import * as sessionActions from "../../store/session";
 import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
-  let history = useHistory()
+  let history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -20,7 +20,7 @@ function ProfileButton({ user }) {
       setShowMenu(false);
     };
 
-    document.addEventListener('click', closeMenu);
+    document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
@@ -31,22 +31,30 @@ function ProfileButton({ user }) {
     history.push("/");
   };
 
-  return (
-    <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{`User: ${user.username}`}</li>
-          <li>{`Email: ${user.email}`}</li>
-          <li>
+  if (showMenu) {
+    return (
+      <div className="dropdown">
+        <button onClick={openMenu}>
+          <i className="fas fa-user-circle" />
+        </button>
+        <div className="dropdown-content">
+          <div className="dropdown-content-item">{`User: ${user.username}`}</div>
+          <div className="dropdown-content-item">{`Email: ${user.email}`}</div>
+          <div className="dropdown-content-item">
             <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )}
-    </>
-  );
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="dropdown">
+        <button onClick={openMenu}>
+          <i className="fas fa-user-circle" />
+        </button>
+      </div>
+    );
+  }
 }
 
 export default ProfileButton;
