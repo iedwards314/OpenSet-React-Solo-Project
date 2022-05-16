@@ -38,6 +38,10 @@ nav {
     margin-right: auto;
 }
 
+.nav-button-container{
+    display: flex;
+}
+
 .navButton {
     display: block;
     width: 115px;
