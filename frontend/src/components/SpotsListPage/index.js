@@ -9,6 +9,8 @@ const SpotsListPage = ({ isLoaded }) => {
   // debugger
   const sessionUser = useSelector((state) => state.session.user);
 
+  console.log("index page sessionUser is...",sessionUser)
+
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots);
 
@@ -39,23 +41,8 @@ const SpotsListPage = ({ isLoaded }) => {
     }
   };
 
-  const userEditFunc = (spot) => {
-    if (!sessionUser) return;
-    if (sessionUser.id === spot.userId) {
-      return (
-        <>
-          <NavLink className="editButton" exact to={`/spots/${spot.id}/edit`}>
-            Edit
-          </NavLink>
-        </>
-      );
-    } else {
-      return null;
-    }
-  };
-
   return (
-    <>
+    <section className="section-spots-list">
       <h2 className="spot-list-header">Find the Perfect Set!</h2>
       <div className="spots-list-container">
       {createSpotButton()}
@@ -63,13 +50,12 @@ const SpotsListPage = ({ isLoaded }) => {
       <ul className="spots-list">
         {spotsArr.map((spot) => (
           <li className="spot-item-container" key={spot?.id}>
-            <SpotCard spot={spot} sessionUser={sessionUser}/>
-              {/* {userEditFunc(spot)} */}
+            <SpotCard spot={spot}/>
           </li>
         ))}
       </ul>
       </div>
-    </>
+    </section>
   );
 };
 
