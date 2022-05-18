@@ -52,7 +52,9 @@
 /* Footer CSS */
 
 .splash-footer {
-    padding: 12.8rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 3.2rem 0;
     border-top: 1px solid #eee;
     font-size: 1.2rem;
     background-color: #B0B0B0;;
@@ -75,19 +77,38 @@
 .author-info{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
 }
+
+.author-info ul {
+    display: flex;
+}
+
+.footer-link {
+    text-decoration: none;
+    margin-right: 1rem;
+    font-size: 1.6rem;
+
+}
+
 .author-text{
-    margin-left: 3.0rem;
-    font-size: 1.4rem;
+    margin-right: 3.0rem;
+    font-size: 1.6rem;
 
 }
 .disclaimer-text{
     font-weight: normal;
+    font-size: 1.2rem;
 }
-.linkedIn-logo{
-    height: 2.4rem;
-    width: 2.4rem;
-    margin-left: 1.0rem;
+
+.logo-github{
+    text-decoration: none;
+    height: 3.0rem;
+    color: #171515;
+}
+
+.logo-linkedIn{
+    text-decoration: none;
+    height: 3.0rem;
+    color: #0072b1;
 }
