@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { getSpots } from "../../store/spots";
+import SpotCard from "./spotCard";
 import "./SpotsListPage.css";
 
 const SpotsListPage = ({ isLoaded }) => {
@@ -28,11 +29,11 @@ const SpotsListPage = ({ isLoaded }) => {
     } else {
       return (
         <>
-        <div className="add-button-container">
-        <NavLink className="addButton" exact to="/spots/add">
-          Add Spot
-        </NavLink>
-        </div>
+          <div className="add-button-container">
+            <NavLink className="addButton" exact to="/spots/add">
+              Add Spot
+            </NavLink>
+          </div>
         </>
       );
     }
@@ -55,19 +56,15 @@ const SpotsListPage = ({ isLoaded }) => {
 
   return (
     <>
-      <h2 className="spot-list-header">Spots List</h2>
+      <h2 className="spot-list-header">Find the Perfect Set!</h2>
       <div className="spots-list-container">
       {createSpotButton()}
       {spotsArr.length <= 0 && <span>No Spots Available Right Now</span>}
       <ul className="spots-list">
         {spotsArr.map((spot) => (
           <li className="spot-item-container" key={spot?.id}>
-            <NavLink to={`/spots/${spot.id}`}>
-              <img className="spots-list-image" src={`${spot?.mainImageURL}`} alt="movie set idea"></img>
-            </NavLink>
-            <h3 className="spot-name">{spot?.name}</h3>
-            <h4 className="spot-host">{`Hosted By: ${spot.User ? spot.User.username : null}`}</h4>
-              {userEditFunc(spot)}
+            <SpotCard spot={spot} sessionUser={sessionUser}/>
+              {/* {userEditFunc(spot)} */}
           </li>
         ))}
       </ul>
