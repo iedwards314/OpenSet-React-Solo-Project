@@ -41,6 +41,8 @@
 .spot-title{
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
+    font-size: 32px;
 }
 
 .spot-image {
@@ -55,6 +57,12 @@
     margin-left: 10px;
     padding: 5px;
     font-size: 14px;
+}
+
+.spot-details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
 }
 
 .spot-details {
