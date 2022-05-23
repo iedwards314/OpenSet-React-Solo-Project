@@ -1,6 +1,31 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const HeroFunc = () => {
+    const sessionUser = useSelector((state) => state.session.user);
+
+    const heroButton = (sessionUser) => {
+        if(!sessionUser){
+            return(
+                <>
+                    <NavLink className="heroButton-signUp" to="/sign-up">
+                        Sign Up now!
+                    </NavLink>
+                </>
+            )
+        }
+        else {
+            return (
+                <>
+                    <NavLink className="heroButton-signUp" to="/spots">
+                        Find a set!
+                    </NavLink>
+                </>
+            )
+        }
+
+    }
+
     return (
         <section className="section-hero">
             <div className="hero">
@@ -16,9 +41,7 @@ const HeroFunc = () => {
                     <p className="hero-description">
                         Welcome to OpenSet. A place for individuals with unique properties for creative artists to film movies, tv shows, or amazing photography.
                     </p>
-                    <NavLink className="heroButton-signUp" to="/sign-up">
-                        Sign Up now!
-                    </NavLink>
+                    {heroButton(sessionUser)}
                 </div>
             </div>
         </section>

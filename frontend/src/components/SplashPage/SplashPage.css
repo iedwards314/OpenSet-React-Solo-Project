@@ -9,7 +9,7 @@
     margin: 0 auto;
     background-color: black;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 5fr 3fr;
     gap: 3.2rem;
     align-items: center;
 }
@@ -25,8 +25,8 @@
     border-radius: 10%;
     padding: 1rem;
     margin: 1rem;
-    height: 100%;
-    width: 90%;
+    height: 90%;
+    width: 70%;
 }
 
 .hero-text {
