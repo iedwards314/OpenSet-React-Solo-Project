@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { getSpots } from "../../store/spots";
 import SpotCard from "./spotCard";
 import "./SpotsListPage.css";
