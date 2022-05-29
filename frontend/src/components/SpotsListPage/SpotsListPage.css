@@ -1,86 +1,110 @@
 
 /* section-spots-list */
+.section-spots-list{
+    max-width: 180rem;
+    margin: 0 auto;
+    padding: 0 3.2rem;
+}
+
 
 .spot-list-header {
-    font-size: 24px;
+    font-size: 3.6rem;
     text-align: center;
 }
 
-.spots-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
+.spots-list-container {
     width: 100%;
 }
 
-.add-button-container {
-    display: flex;
-    justify-content: center;
-}
-
-.addButton {
-    display: block;
-    width: 100px;
-    height: 30px;
-    background: transparent;
-    outline: solid #767676;
-    outline-width: thin;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    line-height: 25px;
-    border-radius: 20px;
-    padding: 5px 20px;
-    margin: 10px 10px;
-    text-decoration: none;
-    font-size: 12px;
-    background-color: #FF5A5F;
-}
-
-.addButton:hover {
-    background-color: #0088a9;
-    color: #fff
-
+.spots-list-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* row-gap: 9.6rem;
+    column-gap: 6.4rem; */
 }
 
 /* Spots Card */
 
-.spots-list-image {
-    border-radius: 10%;
-    padding: 5px;
-    margin: 5px;
-    height: 350px;
-    width: 350px;
+.spot-item-container{
+    max-width: 30rem;
 }
 
-.spot-host {
-    font-size: 10px;
+.spot-card {
+    max-width: 40rem;
+    height: 40rem;
+    /* background-color: #0088a9; */
+}
+
+.spot-image-container{
+    height: 75%;
+    width: 100%;
+}
+
+.spots-list-image {
+    border-radius: 5%;
+    padding: 5px;
+    margin: 5px;
+    height: 95%;
+    width: 95%;
+    object-fit: cover;
+}
+
+.spot-info {
+    height: 25%;
+    width: 100%;
+    margin-left: 1.6rem;
 }
 
 .spot-name {
-    font-size: 14px;
+    font-size: 1.4rem;
+    color: rgb(72, 72, 72);
+}
+
+.spot-host {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: rgb(72, 72, 72);
+}
+
+.spot-location{
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: rgb(72, 72, 72);
+}
+
+.spot-list-price{
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: rgb(72, 72, 72);
 }
 
 .editButton {
     display: block;
-    width: 80px;
-    height: 30px;
+    width: 8.4rem;
+    height: 3.0rem;
     background: transparent;
     outline: solid #767676;
     outline-width: thin;
     text-align: center;
     color: #484848;
     font-weight: bold;
-    line-height: 25px;
-    border-radius: 20px;
-    padding: 5px 20px;
-    margin: 10px 10px;
+    line-height: 2.5rem;
+    border-radius: 2.0rem;
+    padding: 0.5rem 2.0rem;
+    margin: 1.0rem 1.0rem;
     text-decoration: none;
-    font-size: 10px;
 }
 
 .editButton:hover {
     background-color: #0088a9;
     color: #fff;
+}
+
+
+/* Media query */
+
+@media (max-width: 1299px) {
+    .spots-list-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
 }

@@ -90,6 +90,36 @@
     font-weight: bold;
 }
 
+.add-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.addButton {
+    display: block;
+    width: 100px;
+    height: 30px;
+    background: transparent;
+    outline: solid #767676;
+    outline-width: thin;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+    border-radius: 20px;
+    padding: 5px 20px;
+    margin: 10px 10px;
+    text-decoration: none;
+    font-size: 12px;
+    background-color: #FF5A5F;
+}
+
+.addButton:hover {
+    background-color: #0088a9;
+    color: #fff
+
+}
+
 .dropdown {
     position: relative;
     display: inline-block;

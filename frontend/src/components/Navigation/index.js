@@ -17,9 +17,14 @@ function Navigation({ isLoaded }) {
         </NavLink>
         <nav className="navList">
           <ul className="nav-button-container">
+            <li >
+            <NavLink className="addButton" exact to="/spots/add">
+              Add Spot
+            </NavLink>
+            </li>
             <li className="navList-spots">
               <NavLink className="navButton" exact to="/spots">
-                Spots
+                All Spots
               </NavLink>
             </li>
             <li className="navList-item">

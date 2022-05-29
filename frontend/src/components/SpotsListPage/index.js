@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { getSpots } from "../../store/spots";
 import SpotCard from "./spotCard";
 import "./SpotsListPage.css";
@@ -25,35 +25,19 @@ const SpotsListPage = ({ isLoaded }) => {
     return null;
   }
 
-  const createSpotButton = () => {
-    if (!sessionUser) {
-      return null;
-    } else {
-      return (
-        <>
-          <div className="add-button-container">
-            <NavLink className="addButton" exact to="/spots/add">
-              Add Spot
-            </NavLink>
-          </div>
-        </>
-      );
-    }
-  };
-
   return (
     <section className="section-spots-list">
-      <h2 className="spot-list-header">Find the Perfect Set!</h2>
       <div className="spots-list-container">
-      {createSpotButton()}
-      {spotsArr.length <= 0 && <span>No Spots Available Right Now</span>}
-      <ul className="spots-list">
-        {spotsArr.map((spot) => (
-          <li className="spot-item-container" key={spot?.id}>
-            <SpotCard spot={spot}/>
-          </li>
-        ))}
-      </ul>
+        <h2 className="spot-list-header margin-top-sm">Find the Perfect Set!</h2>
+        <div className="margin-top-sm">
+        <ul className="spots-list-grid grid--center--v">
+          {spotsArr.map((spot) => (
+            <li key={spot?.id}>
+              <SpotCard spot={spot}/>
+            </li>
+          ))}
+        </ul>
+        </div>
       </div>
     </section>
   );
