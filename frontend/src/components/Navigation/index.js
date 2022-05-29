@@ -15,6 +15,12 @@ function Navigation({ isLoaded }) {
         <NavLink className="navList-home" exact to="/">
           <img className="img-logo" src={redLogo} alt="logo"></img>
         </NavLink>
+        <div className="nav-search-bar-container">
+          <form className="nav-search-bar">
+            <input placeholder="searchbar"></input>
+            <button>search</button>
+          </form>
+        </div>
         <nav className="navList">
           <ul className="nav-button-container">
             <li >
