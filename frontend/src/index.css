@@ -38,6 +38,10 @@ ul {
     list-style: none;
 }
 
+.general-link {
+    text-decoration: none;
+}
+
 .container {
     max-width: 120rem;
     margin: 0 auto;
@@ -56,6 +60,14 @@ ul {
 
 .grid--3--cols {
     grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4--cols {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid--5--cols {
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .grid--center--v {
